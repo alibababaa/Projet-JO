@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+// prototype des fonctions
 
 // Structure pour stocker les differentes épreuves 
 typedef struct{
