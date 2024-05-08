@@ -1,2 +1,2 @@
-void compareathlete (temps moyen, athlete){
+void tabAthlete (temps moyen, athlete){
   
