@@ -17,4 +17,13 @@ typedef struct {
     int num_entrainement; // Nombre d'entrainements enregistrés
 } Athlete;
 
+// Structure pour stocker les differentes épreuves 
+typedef struct{
+        char epreuveA;    //100m
+        char epreuveB;    //400m
+        char epreuveC;    //5000m
+        char epreuveD;    //marathon
+        char epreuveE;    //4*400m
+}Epreuve;
+
 
