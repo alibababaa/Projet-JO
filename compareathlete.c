@@ -1,1 +1,2 @@
-void compareathlete (temps moyen, athlete
+void compareathlete (temps moyen, athlete){
+  
