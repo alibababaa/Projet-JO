@@ -1,7 +1,4 @@
-typedef struct{
-        char epreuveA;    //100m
-        char epreuveB;    //400m
-        char epreuveC;    //5000m
-        char epreuveD;    //marathon
-        char epreuveE;    //4*400m
-}Epreuve;
+float Tempsmoyen(const Athlete *athlete){
+        float totalTemps=NULL;
+        for(i=0,i<tabAthlete,i++){
+                totalTemps+=
