@@ -34,13 +34,13 @@ typedef struct {
     float moyenne;  // Moyenne des temps
 } Performances;
 
-
+// Fonction qui récupère les temps des athletes et renvoie la moyenne de ces temps
 float Tempsmoyen(const Athlete *athlete){
-        float totalTemps=NULL;
-        for(i=0,i<5,i++){
-                totalTemps+=Athlete.temps[i];
+        float totalTemps=NULL;        // initialisation temps total 
+        for(i=0,i<5,i++){              // boucle qui parcoure chaque épreuve
+                totalTemps+=Athlete.temps[i];  // a chaque itération on ajoute le temps a totalTemps
                 }
-       return totalTemps/5;
+         return totalTemps/5;  // on renvoi les temps additionnés diviser par le nombre d'épreuves
 }
         
 
