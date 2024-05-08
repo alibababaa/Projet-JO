@@ -1,2 +1,2 @@
-void tabAthlete (temps moyen, athlete){
+void tabAthlete (, athlete){
   
