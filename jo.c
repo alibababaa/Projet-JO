@@ -34,4 +34,7 @@ typedef struct {
 } Performances;
 
 
+float tempsMoyen() {
+}
+        
 
