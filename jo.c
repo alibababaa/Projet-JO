@@ -14,7 +14,7 @@ typedef struct{
 
 // Structure pour stocker les informations d'un entraînement
 typedef struct {
-    char date[20];       // Date de l'épreuve
+    char date[11];       // Date de l'épreuve
     Epreuve epreuve[20]; // Type d'épreuve
     float temps;         // Temps de la performance
     int position;        // Utilisé uniquement pour le relais
@@ -25,6 +25,7 @@ typedef struct {
     char name[50];               // Nom de l'athlète
     Entrainement *entrainements; // Détails d'un entraînement spécifique de l'athlète
     int num_entrainement;        // Nombre d'entrainements enregistrés
+    float temps[];               // Temps pour chaque épreuves
 } Athlete;
 
 typedef struct {
