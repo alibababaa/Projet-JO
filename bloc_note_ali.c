@@ -48,6 +48,99 @@ int main() {
 
 
 
+//ChatGPT qui a réecrit la procédure de sorte à ce qu'il prenne en compte les données de chaque fichier
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <float.h> // Ajouté pour FLT_MAX
+
+// Structure pour représenter un athlète
+typedef struct {
+    char date[20];
+    char discipline[20];
+    float temps;
+} Athlete;
+
+// Fonction pour trouver les 3 meilleurs athlètes par discipline
+void meilleursAthletes(const char *nomFichier, Athlete meilleursAthletes[3]) {
+    FILE *fichier = fopen(nomFichier, "r");
+    if (fichier == NULL) {
+        perror("Erreur lors de l'ouverture du fichier");
+        exit(EXIT_FAILURE);
+    }
+
+    // Initialisation des meilleurs athlètes avec des temps très élevés
+    for (int i = 0; i < 3; i++) {
+        strcpy(meilleursAthletes[i].date, "");
+        strcpy(meilleursAthletes[i].discipline, "");
+        meilleursAthletes[i].temps = FLT_MAX;
+    }
+
+    // Lecture des données du fichier
+    Athlete athlete;
+    while (fscanf(fichier, "%s %s %f", athlete.date, athlete.discipline, &athlete.temps) == 3) {
+        // Trouver les trois meilleurs athlètes pour chaque discipline
+        for (int i = 0; i < 3; i++) {
+            if (athlete.temps < meilleursAthletes[i].temps) {
+                // Insérer l'athlète dans la position i et décaler les autres
+                for (int j = 2; j > i; j--) {
+                    strcpy(meilleursAthletes[j].date, meilleursAthletes[j - 1].date);
+                    strcpy(meilleursAthletes[j].discipline, meilleursAthletes[j - 1].discipline);
+                    meilleursAthletes[j].temps = meilleursAthletes[j - 1].temps;
+                }
+                strcpy(meilleursAthletes[i].date, athlete.date);
+                strcpy(meilleursAthletes[i].discipline, athlete.discipline);
+                meilleursAthletes[i].temps = athlete.temps;
+                break;
+            }
+        }
+    }
+
+    fclose(fichier);
+}
+
+int main() {
+    // Tableau pour stocker les 3 meilleurs athlètes par discipline
+    Athlete meilleursAthletesParDiscipline[5][3];
+
+    // Noms des fichiers pour chaque discipline
+    const char *fichiers[] = {"discipline1.txt", "discipline2.txt", "discipline3.txt", "discipline4.txt", "discipline5.txt"};
+
+    // Trouver les meilleurs athlètes pour chaque discipline
+    for (int i = 0; i < 5; i++) {
+        meilleursAthletes(fichiers[i], meilleursAthletesParDiscipline[i]);
+    }
+
+    // Afficher les meilleurs athlètes par discipline
+    for (int i = 0; i < 5; i++) {
+        printf("Meilleurs athlètes pour la discipline %d :\n", i+1);
+        for (int j = 0; j < 3; j++) {
+            printf("Date: %s, Discipline: %s, Temps: %.2f\n", meilleursAthletesParDiscipline[i][j].date, 
+                                                                meilleursAthletesParDiscipline[i][j].discipline,
+                                                                meilleursAthletesParDiscipline[i][j].temps);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Fonction pour avoir les 3 athlètes avec les meilleures moyennes de temps
 void meilleursAthletes(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete *top 3) {
 
