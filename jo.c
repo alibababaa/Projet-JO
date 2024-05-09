@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-// prototype des fonctions
+#include "Bibli.h"
 
 // Structure pour stocker les differentes épreuves 
 typedef struct{
