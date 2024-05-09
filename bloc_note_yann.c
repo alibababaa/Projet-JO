@@ -34,9 +34,7 @@ void afficherHistorique(Athlete athlete) {
     }
 }
 
-int main() {
-    Athlete athletes[MAX_ATHLETES];
-    int nb_athletes = 0;
+
 void copieinfo(){
     for (int i = 0; i < MAX_ATHLETES; i++) {
         char nom_fichier[MAX_LONGUEUR_LIGNE];
@@ -66,6 +64,8 @@ void copieinfo(){
         afficherHistorique(athletes[i]);
     }
 }
-
+int main() {
+    Athlete athletes[MAX_ATHLETES];
+    int nb_athletes = 0;
     return 0;
 }
