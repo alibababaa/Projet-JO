@@ -4,7 +4,7 @@
 struct Date {
     int jour;
     int mois;
-    int };
+    int années;
 };
 
 // Fonction pour demander à l'utilisateur de creer un entrainement
