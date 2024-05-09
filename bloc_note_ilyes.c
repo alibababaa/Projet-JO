@@ -80,6 +80,6 @@ scanf("%d:%d:%d:%d",&temps.heure,&temps.minutes,&temps.secondes,&temps.milliseco
         
 
      
-}
+
 
 
