@@ -1,4 +1,4 @@
-// ChatGPT qui a utilisé le tri pour ressortir les 3 meilleures athletes
+// ChatGPT qui a utilisé le tri pour ressortir les 3 meilleures athletes sans prendre en compte les fichiers
 void meilleursAthlete(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete *top3) {
     // Tableau pour stocker les 4 moyennes
     float moyennes[4] = {a.moyenne, b.moyenne, c.moyenne, autres.moyenne};
@@ -132,7 +132,7 @@ int main() {
 
 
 
-
+// Fonction évolution de la perf entre deux entrainemetns que le coach a choisi
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -175,7 +175,10 @@ float evolutionPerformance(const char *nomFichier, const char *date1, const char
     return temps2 - temps1;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+
+    FILE* fichier = NULL;
+
     char nomFichier[50], date1[20], date2[20];
 
     printf("Entrez le nom du fichier contenant les données des entraînements : ");
