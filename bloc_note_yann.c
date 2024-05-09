@@ -37,7 +37,7 @@ void afficherHistorique(Athlete athlete) {
 int main() {
     Athlete athletes[MAX_ATHLETES];
     int nb_athletes = 0;
-
+void copieinfo(){
     for (int i = 0; i < MAX_ATHLETES; i++) {
         char nom_fichier[MAX_LONGUEUR_LIGNE];
         sprintf(nom_fichier, "athlete_%d.txt", i+1);
@@ -65,6 +65,7 @@ int main() {
     for (int i = 0; i < nb_athletes; i++) {
         afficherHistorique(athletes[i]);
     }
+}
 
     return 0;
 }
