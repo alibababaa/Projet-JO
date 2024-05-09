@@ -48,7 +48,7 @@ int main() {
 
 
 
-//ChatGPT qui a réecrit la procédure de sorte à ce qu'il prenne en compte les données de chaque fichier
+// Fonction qui ressort 3 meilleures athletes à partir de leur fichier
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
