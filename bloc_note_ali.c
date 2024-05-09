@@ -1,5 +1,8 @@
 // Fonction pour avoir les 3 athlètes avec les meilleures moyennes de temps
-float compareAthlete(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete *top 3) {
+void meilleursAthletes(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete *top 3) {
+
+        float moyenne[4]={a.moyenne, b.moyenne, c.moyenne, autres.moyenne};
+        
         if (a.moyenne > autres.moyenne && b.moyenne > autres.moyenne && c.moyenne > autres.moyenne) {
                 if(a.moyenne > b.moyenne) {
                         return a; }
@@ -21,27 +24,6 @@ float compareAthlete(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete *t
 }
   
 
-// Ce que ChatGPT m'a écrit quand je lui ai demandé de corrigé le code au dessus
-Athlete compareAthlete(Athlete a, Athlete b, Athlete c, Athlete autres) {
-    if (a.moyenne > autres.moyenne && b.moyenne > autres.moyenne && c.moyenne > autres.moyenne) {
-        if (a.moyenne > b.moyenne) {
-            if (a.moyenne > c.moyenne) {
-                return a;
-            } else {
-                return c;
-            }
-        } else {
-            if (b.moyenne > c.moyenne) {
-                return b;
-            } else {
-                return c;
-            }
-        }
-    } else {
-        return autres;
-    }
-}
-
 
 
 // ChatGPT qui a utilisé le tri pour ressortir les 3 meilleures athletes
@@ -52,8 +34,8 @@ void compareAthlete(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete *to
     // Tri des moyennes en ordre décroissant
     for (int i = 0; i < 3; i++) {
         for (int j = i + 1; j < 4; j++) {
-            if (moyennes[i] < moyennes[j]) {
-                // Échanger les valeurs si la moyenne actuelle est inférieure à la suivante
+            if (moyennes[i] > moyennes[j]) {
+                // Échanger les valeurs si la moyenne actuelle est supérieure à la suivante
                 float temp = moyennes[i];
                 moyennes[i] = moyennes[j];
                 moyennes[j] = temp;
@@ -85,3 +67,5 @@ int main() {
 
     return 0;
 }
+
+
