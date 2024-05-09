@@ -1,33 +1,5 @@
-// Fonction pour avoir les 3 athlètes avec les meilleures moyennes de temps
-void meilleursAthletes(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete *top 3) {
-
-        float moyenne[4]={a.moyenne, b.moyenne, c.moyenne, autres.moyenne};
-        
-        if (a.moyenne > autres.moyenne && b.moyenne > autres.moyenne && c.moyenne > autres.moyenne) {
-                if(a.moyenne > b.moyenne) {
-                        return a; }
-                else if (b.moyenne > a.moyenne)
-                        return b; }
-                else if (b.moyenne > c.moyenne) {
-                        return b; }
-                else if (c.moyenne > b.moyenne) {
-                        return c; }
-                else if (a.moyenne > c.moyenne)
-                        return a; }
-                else { 
-                        return c; }
-        }
-        else {
-                
-        }
-          
-}
-  
-
-
-
 // ChatGPT qui a utilisé le tri pour ressortir les 3 meilleures athletes
-void compareAthlete(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete *top3) {
+void meilleursAthlete(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete *top3) {
     // Tableau pour stocker les 4 moyennes
     float moyennes[4] = {a.moyenne, b.moyenne, c.moyenne, autres.moyenne};
 
@@ -67,5 +39,39 @@ int main() {
 
     return 0;
 }
+
+
+
+
+
+
+
+
+
+// Fonction pour avoir les 3 athlètes avec les meilleures moyennes de temps
+void meilleursAthletes(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete *top 3) {
+
+        float moyenne[4]={a.moyenne, b.moyenne, c.moyenne, autres.moyenne};
+        
+        if (a.moyenne > autres.moyenne && b.moyenne > autres.moyenne && c.moyenne > autres.moyenne) {
+                if(a.moyenne > b.moyenne) {
+                        return a; }
+                else if (b.moyenne > a.moyenne)
+                        return b; }
+                else if (b.moyenne > c.moyenne) {
+                        return b; }
+                else if (c.moyenne > b.moyenne) {
+                        return c; }
+                else if (a.moyenne > c.moyenne)
+                        return a; }
+                else { 
+                        return c; }
+        }
+        else {
+                
+        }
+          
+}
+  
 
 
