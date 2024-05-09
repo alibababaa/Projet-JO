@@ -3,5 +3,6 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
-// prototype des fonctions
 
+// prototype des fonctions
+float Tempsmoyen();
