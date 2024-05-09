@@ -1,5 +1,5 @@
 // Fonction pour avoir les 3 athlètes avec les meilleures moyennes de temps
-float compareAthlete(Athlete a, Athlete b, Athlete c, Athlete autres) {
+float compareAthlete(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete *top 3) {
         if (a.moyenne > autres.moyenne && b.moyenne > autres.moyenne && c.moyenne > autres.moyenne) {
                 if(a.moyenne > b.moyenne) {
                         return a; }
