@@ -49,9 +49,10 @@ int main() {
 
 // Structure pour représenter un athlète
 typedef struct {
-    char date[20];
-    char discipline[20];
-    float temps;
+    char name[50];               // Nom de l'athlète
+    Entrainement *entrainements; // Détails d'un entraînement spécifique de l'athlète
+    int num_entrainement;        // Nombre d'entrainements enregistrés
+    float temps[];               // Temps pour chaque épreuves
 } Athlete;
 
 // Fonction pour trouver les 3 meilleurs athlètes par discipline
