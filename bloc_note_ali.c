@@ -47,19 +47,38 @@ int main() {
 #include <stdlib.h>
 #include <string.h>
 
-// Structure pour représenter un athlète
+
+typedef struct {
+    char epreuveA;    // 100m
+    char epreuveB;    // 400m
+    char epreuveC;    // 5000m
+    char epreuveD;    // marathon
+    char epreuveE;    // 4*400m
+} Epreuve;
+
+// Structure pour stocker les informations d'un entraînement
 typedef struct {
     char date[11];       // Date de l'épreuve
-    Epreuve epreuve[20]; // Type d'épreuve
+    Epreuve epreuve;     // Type d'épreuve
     float temps;         // Temps de la performance
     int position;        // Utilisé uniquement pour le relais
 } Entrainement;
 
+// Structure pour stocker les informations d'un athlète
 typedef struct {
-    char date[20];
-    char discipline[20];
-    float temps;
+    char nom[50];               // Nom de l'athlète
+    Entrainement *entrainements; // Détails d'un entraînement spécifique de l'athlète
+    int num_entrainements;      // Nombre d'entrainements enregistrés
+    float *temps;               // Tableau des temps pour chaque épreuve
 } Athlete;
+
+// Structure pour stocker les performances d'un athlète
+typedef struct {
+    float meilleur; // Meilleur temps
+    float pire;     // Pire temps
+    float moyenne;  // Moyenne des temps
+} Performances;
+
 
 // Fonction pour trouver les 3 meilleurs athlètes par discipline
 void meilleuresAthletes(const char *nomsFichiers[], Athlete meilleursAthletes[3]) {
@@ -78,7 +97,10 @@ void meilleuresAthletes(const char *nomsFichiers[], Athlete meilleursAthletes[3]
 
         // Lecture des données du fichier
         Entrainement entrainement;
-        while (fscanf(fichier, "%c %c %f %d", &entrainement.date, &entrainement.epreuve, &entrainement.temps, &entrainement.position) == 4) {
+        while (fscanf(fichier, "while (fscanf(fichier, "%s %c %c %c %c %c %f %d", entrainements[i].date, &entrainements[i].epreuve.epreuveA, 
+                                                   &entrainements[i].epreuve.epreuveB, &entrainements[i].epreuve.epreuveC,
+                                                   &entrainements[i].epreuve.epreuveD, &entrainements[i].epreuve.epreuveE, 
+                                                   &entrainements[i].temps, &entrainements[i].position) == 8) {) {
             // Trouver les trois meilleurs athlètes pour chaque discipline
             for (int j = 0; j < 3; j++) {
                 if (entrainement.temps < meilleursAthletes[j].temps) {
