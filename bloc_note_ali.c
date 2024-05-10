@@ -49,10 +49,16 @@ int main() {
 
 // Structure pour représenter un athlète
 typedef struct {
-    char nom[50];                // Nom de l'athlète
-    Entrainement *entrainements; // Détails d'un entraînement spécifique de l'athlète
-    int num_entrainements;       // Nombre d'entrainements enregistrés
-    float temps[];               // Temps pour chaque épreuves
+    char date[11];       // Date de l'épreuve
+    Epreuve epreuve[20]; // Type d'épreuve
+    float temps;         // Temps de la performance
+    int position;        // Utilisé uniquement pour le relais
+} Entrainement;
+
+typedef struct {
+    char date[20];
+    char discipline[20];
+    float temps;
 } Athlete;
 
 // Fonction pour trouver les 3 meilleurs athlètes par discipline
@@ -71,11 +77,11 @@ void meilleuresAthletes(const char *nomsFichiers[], Athlete meilleursAthletes[3]
         }
 
         // Lecture des données du fichier
-        Athlete athlete;
-        while (fscanf(fichier, "%c %c %f %d", &athlete.nom, &athlete.entrainements, &athlete.num_entrainements, &athlete.temps) == 4) {
+        Entrainement entrainement;
+        while (fscanf(fichier, "%c %c %f %d", &entrainement.date, &entrainement.epreuve, &entrainement.temps, &entrainement.position) == 4) {
             // Trouver les trois meilleurs athlètes pour chaque discipline
             for (int j = 0; j < 3; j++) {
-                if (athlete.temps < meilleursAthletes[j].temps) {
+                if (entrainement.temps < meilleursAthletes[j].temps) {
                     // Insérer l'athlète dans la position j et décaler les autres
                     for (int k = 2; k > j; k--) {
                         meilleursAthletes[k] = meilleursAthletes[k - 1];
