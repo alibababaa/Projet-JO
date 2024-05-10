@@ -49,9 +49,9 @@ int main() {
 
 // Structure pour représenter un athlète
 typedef struct {
-    char name[50];               // Nom de l'athlète
+    char nom[50];                // Nom de l'athlète
     Entrainement *entrainements; // Détails d'un entraînement spécifique de l'athlète
-    int num_entrainement;        // Nombre d'entrainements enregistrés
+    int num_entrainements;       // Nombre d'entrainements enregistrés
     float temps[];               // Temps pour chaque épreuves
 } Athlete;
 
@@ -72,7 +72,7 @@ void meilleuresAthletes(const char *nomsFichiers[], Athlete meilleursAthletes[3]
 
         // Lecture des données du fichier
         Athlete athlete;
-        while (fscanf(fichier, "%c %c %f %d", athlete.date, athlete.discipline, &athlete.temps) == 3) {
+        while (fscanf(fichier, "%c %c %f %d", &athlete.nom, &athlete.entrainements, &athlete.num_entrainements, &athlete.temps) == 4) {
             // Trouver les trois meilleurs athlètes pour chaque discipline
             for (int j = 0; j < 3; j++) {
                 if (athlete.temps < meilleursAthletes[j].temps) {
