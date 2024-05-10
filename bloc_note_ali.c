@@ -72,7 +72,7 @@ void meilleuresAthletes(const char *nomsFichiers[], Athlete meilleursAthletes[3]
 
         // Lecture des données du fichier
         Athlete athlete;
-        while (fscanf(fichier, "%s %s %f", athlete.date, athlete.discipline, &athlete.temps) == 3) {
+        while (fscanf(fichier, "%c %c %f %d", athlete.date, athlete.discipline, &athlete.temps) == 3) {
             // Trouver les trois meilleurs athlètes pour chaque discipline
             for (int j = 0; j < 3; j++) {
                 if (athlete.temps < meilleursAthletes[j].temps) {
