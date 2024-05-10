@@ -19,9 +19,9 @@ typedef struct {
 
 // Structure pour stocker les informations d'un athlète
 typedef struct {
-    char name[50];               // Nom de l'athlète
+    char nom[50];               // Nom de l'athlète
     Entrainement *entrainements; // Détails d'un entraînement spécifique de l'athlète
-    int num_entrainement;        // Nombre d'entrainements enregistrés
+    int num_entrainements;        // Nombre d'entrainements enregistrés
     float temps[];               // Temps pour chaque épreuves
 } Athlete;
 
