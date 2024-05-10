@@ -43,6 +43,97 @@ int main() {
 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Structure pour représenter un athlète
+typedef struct {
+    char date[20];
+    char discipline[20];
+    float temps;
+} Athlete;
+
+// Fonction pour trouver les 3 meilleurs athlètes par discipline
+void meilleuresAthletes(const char *nomsFichiers[], Athlete meilleursAthletes[3]) {
+    // Initialisation des meilleurs athlètes avec des temps très élevés pour ne pas avoir de problème lors de la lecture des valeures 
+    for (int i = 0; i < 3; i++) {
+        meilleursAthletes[i].temps = 999999.0;
+    }
+
+    // Parcourir tous les fichiers des athlètes
+    for (int i = 0; i < 30; i++) {
+        FILE *fichier = fopen(nomsFichiers[i], "r");
+        if (fichier == NULL) {
+            printf("Erreur lors de l'ouverture du fichier");
+            exit(1);
+        }
+
+        // Lecture des données du fichier
+        Athlete athlete;
+        while (fscanf(fichier, "%s %s %f", athlete.date, athlete.discipline, &athlete.temps) == 3) {
+            // Trouver les trois meilleurs athlètes pour chaque discipline
+            for (int j = 0; j < 3; j++) {
+                if (athlete.temps < meilleursAthletes[j].temps) {
+                    // Insérer l'athlète dans la position j et décaler les autres
+                    for (int k = 2; k > j; k--) {
+                        meilleursAthletes[k] = meilleursAthletes[k - 1];
+                    }
+                    meilleursAthletes[j] = athlete;
+                    break;
+                }
+            }
+        }
+
+        fclose(fichier);
+    }
+}
+
+int main() {
+    // Liste des noms de fichiers pour chaque athlète
+    const char *nomsFichiers[] = {
+        "Ademo.txt", "Adlaurent.txt", "Ali.txt", "Bolt.txt", "Brandon.txt",
+        "Clovis.txt", "Etienne.txt", "Fujitora.txt", "Gourcuff.txt", "Ilyes.txt",
+        "Jimmy.txt", "Kevin.txt", "Lemaitre.txt", "Locqman.txt", "Mandzukic.txt",
+        "Messi.txt", "Mkadir.txt", "Mobutu.txt", "Morant.txt", "Neji.txt",
+        "Pablo.txt", "Pirlo.txt", "Robben.txt", "Samy.txt", "Sneijder.txt",
+        "Stephen.txt", "Sylvestre.txt", "Yann.txt", "krilin.txt", "riman.txt"
+    };
+
+    // Tableau pour stocker les 3 meilleurs athlètes par discipline
+    Athlete meilleursAthletesParDiscipline[3];
+
+    // Appel de la fonction pour trouver les meilleurs athlètes
+    meilleuresAthletes(nomsFichiers, meilleursAthletesParDiscipline);
+
+    // Affichage des meilleurs athlètes par discipline
+    for (int i = 0; i < 3; i++) {
+        printf("Meilleurs athlètes pour la discipline %d :\n", i+1);
+        for (int j = 0; j < 3; j++) {
+            printf("Date: %s, Discipline: %s, Temps: %.2f\n", meilleursAthletesParDiscipline[j].date, 
+                                                                meilleursAthletesParDiscipline[j].discipline,
+                                                                meilleursAthletesParDiscipline[j].temps);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -65,8 +156,8 @@ typedef struct {
 void meilleursAthletes(const char *nomFichier, Athlete meilleursAthletes[3]) {
     FILE *fichier = fopen(nomFichier, "r");
     if (fichier == NULL) {
-        perror("Erreur lors de l'ouverture du fichier");
-        exit(EXIT_FAILURE);
+        printf("Erreur lors de l'ouverture du fichier");
+        exit(1);
     }
 
     // Initialisation des meilleurs athlètes avec des temps très élevés
