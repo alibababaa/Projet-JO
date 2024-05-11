@@ -67,7 +67,7 @@ Athlete *lireAthlete(const char *nomFichier) {
     athlete.num_entrainements = i;
 
     // Allocation de la mémoire pour le tableau des temps
-    athlete->temps = (float *)malloc(i * sizeof(float));
+    athlete.temps = (float *)malloc(i * sizeof(float));
     if (athlete.temps == NULL) {
         printf("Erreur lors de l'allocation de la mémoire pour les temps de l'athlète");
         exit(1);
