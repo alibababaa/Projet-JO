@@ -45,3 +45,9 @@ struct heure{
      int secondes;
      int millisecondes;
 }
+struct Date {
+    int jour;
+    int mois;
+    int années;
+};
+
