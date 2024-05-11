@@ -8,6 +8,7 @@
 float Tempsmoyen();
 void tabAthlete();
 void copieinfo();
+void afficherHistorique(Athlete athlete) ;
 // Structure pour stocker les differentes épreuves 
 typedef struct{
         char epreuveA;    //100m
