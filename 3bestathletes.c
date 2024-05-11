@@ -147,7 +147,7 @@ int main() {
     // Libération de la mémoire allouée pour les Athletes
     for (int i = 0; i < 30; i++) {
         free(athletes[i].temps);
-        free(athletes[i].>entrainements);
+        free(athletes[i].entrainements);
         free(athletes[i]);
     }
 
