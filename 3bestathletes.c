@@ -1,3 +1,4 @@
+#include "Bibli.h"
 
 // Fonction pour lire les données d'un fichier et initialiser un Athlete
 Athlete *lireAthlete(const char *nomFichier) {
