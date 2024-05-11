@@ -15,12 +15,6 @@ Athlete *lireAthlete(const char *nomFichier) {
         exit(1);
     }
 
-    Athlete *athlete = malloc(sizeof(Athlete));
-    if (athlete == NULL) {
-        fclose(fichier);
-        perror("Erreur lors de l'allocation de la mémoire pour l'athlète");
-        exit(EXIT_FAILURE);
-    }
 
     // Lecture du nom de l'athlète à partir du nom du fichier
     char nomAthlete[50];
