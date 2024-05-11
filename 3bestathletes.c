@@ -1,33 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <float.h>
-
-// Structure pour stocker les differentes épreuves 
-typedef struct {
-    char epreuveA;    // 100m
-    char epreuveB;    // 400m
-    char epreuveC;    // 5000m
-    char epreuveD;    // marathon
-    char epreuveE;    // 4*400m
-} Epreuve;
-
-// Structure pour stocker les informations d'un entraînement
-typedef struct {
-    char date[11];       // Date de l'épreuve
-    Epreuve epreuve;     // Type d'épreuve
-    float temps;         // Temps de la performance
-    int position;        // Utilisé uniquement pour le relais
-} Entrainement;
-
-// Structure pour stocker les informations d'un athlète
-typedef struct {
-    char nom[50];               // Nom de l'athlète
-    Entrainement *entrainements; // Détails d'un entraînement spécifique de l'athlète
-    int num_entrainements;      // Nombre d'entrainements enregistrés
-    float *temps;               // Tableau des temps pour chaque épreuve
-} Athlete;
-
+#incude "Bibli.h"
 // Fonction pour lire les données d'un fichier et initialiser un Athlete
 Athlete *lireAthlete(const char *nomFichier) {
     FILE *fichier = fopen(nomFichier, "r");
