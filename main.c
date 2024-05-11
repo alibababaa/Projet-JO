@@ -17,3 +17,5 @@ if (f==1){
            printf("erreur saisie");
     }
   
+return 0;
+}
