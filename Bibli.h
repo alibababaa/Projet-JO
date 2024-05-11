@@ -11,6 +11,7 @@ void copieinfo();
 void afficherHistorique(Athlete athlete) ;
 void meilleursAthlete(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete *top3) {
     // Tableau pour stocker les 4 moyennes
+float evolutionPerformance(const char *nomFichier, const char *date1, const char *date2) {
 
 // Structure pour stocker les differentes épreuves 
 typedef struct{
@@ -53,4 +54,5 @@ struct Date {
     int mois;
     int années;
 };
+
 
