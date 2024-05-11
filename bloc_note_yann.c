@@ -31,7 +31,7 @@ typedef struct {
 
 void afficherHistorique(Athlete athlete) {
     printf("Historique des entraînements pour %s :\n", athlete.nom);
-    for (int i = 0; i < athlete.nb_entrainements; i++) {
+    for (int i = 0; i < athlete.num_entrainements; i++) {
         printf("Date: %s, Épreuve: %s, Performance: %.2f\n", athlete.entrainements[i].date,
                athlete.entrainements[i].epreuve, athlete.entrainements[i].performance);
     }
