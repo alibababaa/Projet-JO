@@ -39,3 +39,9 @@ typedef struct {
     float pire;     // Pire temps
     float moyenne;  // Moyenne des temps
 } Performances;
+struct heure{
+     int heure;
+     int minutes;
+     int secondes;
+     int millisecondes;
+}
