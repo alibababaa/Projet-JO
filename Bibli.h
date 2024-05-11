@@ -7,6 +7,7 @@
 // prototype des fonctions
 float Tempsmoyen();
 void tabAthlete();
+void copieinfo();
 // Structure pour stocker les differentes épreuves 
 typedef struct{
         char epreuveA;    //100m
