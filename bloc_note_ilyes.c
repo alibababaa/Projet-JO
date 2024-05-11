@@ -8,7 +8,7 @@ struct Date {
 };
 
 // Fonction pour demander à l'utilisateur de creer un entrainement
-struct Entrainement entrainement;
+Entrainement nouvelEntrainement;
     do {
         // Demander à l'utilisateur de saisir la date au format jour/mois/année
         printf("Entrez une date au format jour/mois/année ( : ");
