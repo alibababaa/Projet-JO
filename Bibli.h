@@ -9,6 +9,9 @@ float Tempsmoyen();
 void tabAthlete();
 void copieinfo();
 void afficherHistorique(Athlete athlete) ;
+void meilleursAthlete(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete *top3) {
+    // Tableau pour stocker les 4 moyennes
+
 // Structure pour stocker les differentes épreuves 
 typedef struct{
         char epreuveA;    //100m
