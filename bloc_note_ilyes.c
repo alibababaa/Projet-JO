@@ -8,7 +8,8 @@ struct Date {
 };
 
 // Fonction pour demander à l'utilisateur de creer un entrainement
-Entrainement nouvelEntrainement;
+Entrainement creerNouvelentrainement(){
+Entrainement nouvelentrainement;
     do {
         // Demander à l'utilisateur de saisir la date au format jour/mois/année
         printf("Entrez une date au format jour/mois/année ( : ");
@@ -24,8 +25,6 @@ Entrainement nouvelEntrainement;
         }
     } while (!valid);
 
-    return date;
-}
 printf("quel est le type d'épreuve/n");
 scanf("%c",&epreuve);
 if(epreuve!="100m"&&epreuve!="400m"&&epreuve!="5000m"&&epreuve!=relais&&epreuve!=marathon){
@@ -71,7 +70,45 @@ scanf("%d:%d:%d:%d",&temps.heure,&temps.minutes,&temps.secondes,&temps.milliseco
      printf("erreur de saisie,veuillez saisir un chiffre entre 1 et 4/n");
    }
  }
+return nouvelentrainement;
+}
 
+//fonction pour enregistrer le nouvel entrainement dans un fichier 
+void sauvegarderentrainement(const char*nouvelentrainement.txt,const Entrainement*entrainement) {
+    FILE*fichier=fopen(nouvelentrainement.txt,"a")
+    if(fichier=NULL){
+       printf("erreur:impossible d'ouvrir le fichier"/n);
+       return;
+    }
+   fprintf(fichier,"Date:%d:%d:%d:%d",nouvelentrainement.date);
+   fprintf(fichier,"epreuve:%c",nouvelentrainement.epreuve);
+   fprintf(fichier,"Temps:"%f",nouvelentrainement.temps);
+   fprintf(fichier,"position:%c",nouvelentrainement.position);
+fclose(fichier);
+printf("votre entrainement a bien été sauvegarder/n");
+}
+
+//Fonction main
+int main(){
+Entrainement nouvelentrainement;
+char ajouterenrainement;
+while(1){
+nouvelentrainement=creernouvelentrainement;
+sauvegarderentrainement(&nouvelentrainement);
+char ajouterenrainement;
+printf("voulez vous ajouter un nouvel entrainement ?/n");
+scanf("%c",&ajouterentrainement);
+if(ajouterentrainement!="oui"){
+    break;
+}
+printf("votre nouvel entrainement a bien été ajouter/n");
+    
+return 0;
+}
+}
+
+
+    
 
 
  
