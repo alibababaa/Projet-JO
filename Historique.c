@@ -1,3 +1,5 @@
+#include"Bibli.h"
+
 void afficherHistorique(Athlete athlete) {
     printf("Historique des entraînements pour %s :\n", athlete.nom);
     for (int i = 0; i < athlete.num_entrainements; i++) {
