@@ -126,3 +126,41 @@ int main() {
 
     return 0;
 }
+
+
+
+
+
+
+#include "Bibli.h"
+
+
+float relais[6]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
