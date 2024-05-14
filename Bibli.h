@@ -4,14 +4,6 @@
 #include <time.h>
 #include <math.h>
 
-// prototype des fonctions
-float Tempsmoyen();
-void tabAthlete();
-void copieinfo();
-void afficherHistorique(Athlete athlete) ;
-void meilleursAthlete(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete *top3) {
-    // Tableau pour stocker les 4 moyennes
-float evolutionPerformance(const char *nomFichier, const char *date1, const char *date2) {
 
 // Structure pour stocker les differentes épreuves 
 typedef struct{
@@ -32,7 +24,7 @@ typedef struct {
 
 // Structure pour stocker les informations d'un athlète
 typedef struct {
-    char name[50];               // Nom de l'athlète
+    char nom[50];               // Nom de l'athlète
     Entrainement *entrainements; // Détails d'un entraînement spécifique de l'athlète
     int num_entrainement;        // Nombre d'entrainements enregistrés
     float temps[];               // Temps pour chaque épreuves
@@ -43,16 +35,25 @@ typedef struct {
     float pire;     // Pire temps
     float moyenne;  // Moyenne des temps
 } Performances;
-struct heure{
+typedef struct {
      int heure;
      int minutes;
      int secondes;
      int millisecondes;
-}
-struct Date {
+}heure;
+typedef struct  {
     int jour;
     int mois;
     int années;
-};
+}Date;
 
-
+// prototype des fonctions
+float Tempsmoyen();
+void tabAthlete();
+void copieinfo();
+void afficherHistorique(Athlete athlete) ;
+void meilleursAthlete(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete *top3) ;
+    // Tableau pour stocker les 4 moyennes
+float evolutionPerformance(const char *nomFichier, const char *date1, const char *date2) ;
+Entrainement creerNouvelentrainement();
+void sauvegarderentrainement(const char*nouvelentrainement,const Entrainement*entrainement);
