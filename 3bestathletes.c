@@ -132,10 +132,71 @@ int main() {
 
 
 
+
+
+
 #include "Bibli.h"
 
 
-float relais[6]
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    char *fichiers[] = {"Ademo.txt", "Adlaurent.txt", "Ali.txt", "Boulon.txt", "Brandon.txt", "Clovis.txt", "Etienne.txt", "Fujitora.txt", "Gourcuff.txt", "Ilyes.txt", "Jimmy.txt", "Kevin.txt", "Lemaître.txt", "Locqman.txt", "Mandzukic.txt", "Messi.txt", "Mkadir.txt", "Mobutu.txt", "Morant.txt", "Neji.txt", "Pablo.txt", "Pirlo.txt", "Robben.txt", "Samy.txt", "Sneijder.txt", "Stephen.txt", "Sylvestre.txt", "Yann.txt", "krilin.txt", "riman.txt"};
+    char delimiteur[] = ";";
+    char ligne[100];
+    char *token;
+    int heures_total = 0, minutes_total = 0, secondes_total = 0, centiemes_total = 0;
+    int nombre_lignes = 0;
+
+    for (int i = 0; i < sizeof(fichiers) / sizeof(fichiers[0]); i++) {
+        FILE *fichier = fopen(fichiers[i], "r");
+
+        // Vérifier si l'ouverture a réussi
+        if (fichier == NULL) {
+            printf("Impossible d'ouvrir le fichier %s.\n", fichiers[i]);
+            continue; // Passer au fichier suivant en cas d'échec d'ouverture
+        }
+
+        // Réinitialiser les totaux pour chaque fichier
+        heures_total = 0;
+        minutes_total = 0;
+        secondes_total = 0;
+        centiemes_total = 0;
+        nombre_lignes = 0;
+
+        // Lire chaque ligne du fichier
+        while (fgets(ligne, sizeof(ligne), fichier)) {
+            // Utilisation de strtok() pour diviser la ligne en sous-chaînes
+            token = strtok(ligne, delimiteur);
+
+            // Ignorer les deux premières colonnes
+            token = strtok(NULL, delimiteur);
+            token = strtok(NULL, delimiteur);
+
+            // Extraire le temps (heure:minute:seconde:centième) de la troisième colonne
+            token = strtok(NULL, delimiteur);
+            sscanf(token, "%d:%d:%d:%d", &heures_total, &minutes_total, &secondes_total, &centiemes_total);
+
+            // Calculer la somme totale des temps
+            nombre_lignes++;
+        }
+
+        // Fermer le fichier
+        fclose(fichier);
+
+        // Calculer la moyenne des temps pour le fichier actuel
+        int heures_moyenne = heures_total / nombre_lignes;
+        int minutes_moyenne = minutes_total / nombre_lignes;
+        int secondes_moyenne = secondes_total / nombre_lignes;
+        int centiemes_moyenne = centiemes_total / nombre_lignes;
+
+        printf("Moyenne des temps pour le fichier %s : %02d:%02d:%02d:%02d\n", fichiers[i], heures_moyenne, minutes_moyenne, secondes_moyenne, centiemes_moyenne);
+    }
+
+    return 0;
+}
 
 
 
