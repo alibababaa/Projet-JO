@@ -1,5 +1,240 @@
 #include "Bibli.h"
 
+#define NOMBRE_ATHLETES 30
+
+typedef struct {
+    char nom[50];
+    int heures;
+    int minutes;
+    int secondes;
+    int centiemes;
+} Temps;
+
+void trier_temps(Temps temps[], int n) {
+    // Tri par insertion
+    int i, j;
+    Temps temp;
+    for (i = 1; i < n; i++) {
+        temp = temps[i];
+        j = i - 1;
+        while (j >= 0 && (temps[j].heures > temp.heures || (temps[j].heures == temp.heures && (temps[j].minutes > temp.minutes || (temps[j].minutes == temp.minutes && (temps[j].secondes > temp.secondes || (temps[j].secondes == temp.secondes && temps[j].centiemes > temp.centiemes))))))) {
+            temps[j + 1] = temps[j];
+            j = j - 1;
+        }
+        temps[j + 1] = temp;
+    }
+}
+
+void afficher_3_plus_rapides(Temps temps[], int n) {
+    printf("Les 3 athlètes les plus rapides :\n");
+    for (int i = 0; i < 3 && i < n; i++) {
+        printf("%s - Temps : %02d:%02d:%02d:%02d \n", temps[i].nom, temps[i].heures, temps[i].minutes, temps[i].secondes, temps[i].centiemes);
+    }
+    printf("\n");
+}
+
+int main() {
+    FILE *fichier;
+    char ligne[100];
+    char delimiteur[] = ";";
+    Temps relais[NOMBRE_ATHLETES], m_100[NOMBRE_ATHLETES], marathon[NOMBRE_ATHLETES], m_400[NOMBRE_ATHLETES], m_5000[NOMBRE_ATHLETES];
+    int relais_count = 0, m_100_count = 0, marathon_count = 0, m_400_count = 0, m_5000_count = 0;
+
+    char *fichiers[] = {"Ademo.txt", "Adlaurent.txt", "Ali.txt", "Boulon.txt", "Brandon.txt", "Clovis.txt", "Etienne.txt", "Fujitora.txt", "Gourcuff.txt", "Ilyes.txt", "Jimmy.txt", "Kevin.txt", "Lemaître.txt", "Locqman.txt", "Mandzukic.txt", "Messi.txt", "Mkadir.txt", "Mobutu.txt", "Morant.txt", "Neji.txt", "Pablo.txt", "Pirlo.txt", "Robben.txt", "Samy.txt", "Sneijder.txt", "Stephen.txt", "Sylvestre.txt", "Yann.txt", "krilin.txt", "riman.txt"};
+
+    for (int i = 0; i < 30; i++) {
+        fichier = fopen(fichiers[i], "r");
+
+        // Vérifier si l'ouverture a réussi
+        if (fichier == NULL) {
+            printf("Impossible d'ouvrir le fichier %s.\n", fichiers[i]);
+            continue; // Passer au fichier suivant en cas d'échec d'ouverture
+        }
+
+        // Lire chaque ligne du fichier
+        while (fgets(ligne, sizeof(ligne), fichier)) {
+            // Utilisation de strtok() pour diviser la ligne en sous-chaînes
+            char *token = strtok(ligne, delimiteur);
+
+            // Ignorer la première colonne (nom de l'athlète)
+            token = strtok(NULL, delimiteur);
+
+            // Extraire la discipline
+            char discipline[20];
+            strcpy(discipline, token);
+
+            // Ignorer la troisième colonne (temps)
+            token = strtok(NULL, delimiteur);
+
+            // Extraire le temps (heure:minute:seconde:centième)
+            token = strtok(NULL, delimiteur);
+            int heures, minutes, secondes, centiemes;
+            sscanf(token, "%d:%d:%d:%d", &heures, &minutes, &secondes, &centiemes);
+
+            // Stocker le temps dans le tableau correspondant à la discipline
+            if (strcmp(discipline, "relais") == 0) {
+                strcpy(relais[relais_count].nom, fichiers[i]);
+                relais[relais_count].heures = heures;
+                relais[relais_count].minutes = minutes;
+                relais[relais_count].secondes = secondes;
+                relais[relais_count].centiemes = centiemes;
+                relais_count++;
+            } else if (strcmp(discipline, "100m") == 0) {
+                strcpy(m_100[m_100_count].nom, fichiers[i]);
+                m_100[m_100_count].heures = heures;
+                m_100[m_100_count].minutes = minutes;
+                m_100[m_100_count].secondes = secondes;
+                m_100[m_100_count].centiemes = centiemes;
+                m_100_count++;
+            } else if (strcmp(discipline, "marathon") == 0) {
+                strcpy(marathon[marathon_count].nom, fichiers[i]);
+                marathon[marathon_count].heures = heures;
+                marathon[marathon_count].minutes = minutes;
+                marathon[marathon_count].secondes = secondes;
+                marathon[marathon_count].centiemes = centiemes;
+                marathon_count++;
+            } else if (strcmp(discipline, "4*400m") == 0) {
+                strcpy(m_400[m_400_count].nom, fichiers[i]);
+                m_400[m_400_count].heures = heures;
+                m_400[m_400_count].minutes = minutes;
+                m_400[m_400_count].secondes = secondes;
+                m_400[m_400_count].centiemes = centiemes;
+                m_400_count++;
+            } else if (strcmp(discipline, "5000m") == 0) {
+                strcpy(m_5000[m_5000_count].nom, fichiers[i]);
+                m_5000[m_5000_count].heures = heures;
+                m_5000[m_5000_count].minutes = minutes;
+                m_5000[m_5000_count].secondes = secondes;
+                m_5000[m_5000_count].centiemes = centiemes;
+                m_5000_count++;
+            }
+        }
+
+        // Fermer le fichier
+        fclose(fichier);
+    }
+
+    // Trier les temps dans chaque tableau par ordre croissant
+    trier_temps(relais, relais_count);
+    trier_temps(m_100, m_100_count);
+    trier_temps(marathon, marathon_count);
+    trier_temps(m_400, m_400_count);
+    trier_temps(m_5000, m_5000_count);
+
+    // Afficher les 3 athlètes les plus rapides dans chaque discipline
+    printf("Relais :\n");
+    afficher_3_plus_rapides(relais, relais_count);
+
+    printf("100m :\n");
+    afficher_3_plus_rapides(m_100, m_100_count);
+
+    printf("Marathon :\n");
+    afficher_3_plus_rapides(marathon, marathon_count);
+
+    printf("4*400m :\n");
+    afficher_3_plus_rapides(m_400, m_400_count);
+
+    printf("5000m :\n");
+    afficher_3_plus_rapides(m_5000, m_5000_count);
+
+    return 0;
+}
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+// Prends seulement les temps dans les fichiers et fait une moyenne
+
+#include "Bibli.h"
+
+
+int main() {
+    char *fichiers[] = {"Ademo.txt", "Adlaurent.txt", "Ali.txt", "Boulon.txt", "Brandon.txt", "Clovis.txt", "Etienne.txt", "Fujitora.txt", "Gourcuff.txt", "Ilyes.txt", "Jimmy.txt", "Kevin.txt", "Lemaître.txt", "Locqman.txt", "Mandzukic.txt", "Messi.txt", "Mkadir.txt", "Mobutu.txt", "Morant.txt", "Neji.txt", "Pablo.txt", "Pirlo.txt", "Robben.txt", "Samy.txt", "Sneijder.txt", "Stephen.txt", "Sylvestre.txt", "Yann.txt", "krilin.txt", "riman.txt"};
+    char delimiteur[] = ";";
+    char ligne[100];
+    char *token;
+    int heures_total = 0, minutes_total = 0, secondes_total = 0, centiemes_total = 0;
+    int nombre_lignes = 0;
+
+    for (int i = 0; i < 30; i++) {
+        FILE *fichier = fopen(fichiers[i], "r");
+
+        // Vérifier si l'ouverture a réussi
+        if (fichier == NULL) {
+            printf("Impossible d'ouvrir le fichier %s.\n", fichiers[i]);
+            continue; // Passer au fichier suivant en cas d'échec d'ouverture
+        }
+
+        // Réinitialiser les totaux pour chaque fichier
+        heures_total = 0;
+        minutes_total = 0;
+        secondes_total = 0;
+        centiemes_total = 0;
+        nombre_lignes = 0;
+
+        // Lire chaque ligne du fichier
+        while (fgets(ligne, sizeof(ligne), fichier)) {
+            // Utilisation de strtok() pour diviser la ligne en sous-chaînes
+            token = strtok(ligne, delimiteur);
+
+            // Ignorer les deux premières colonnes
+            token = strtok(NULL, delimiteur);
+            token = strtok(NULL, delimiteur);
+
+            // Extraire le temps (heure:minute:seconde:centième) de la troisième colonne
+            token = strtok(NULL, delimiteur);
+            sscanf(token, "%d:%d:%d:%d", &heures_total, &minutes_total, &secondes_total, &centiemes_total);
+
+            // Calculer la somme totale des temps
+            nombre_lignes++;
+        }
+
+        // Fermer le fichier
+        fclose(fichier);
+
+        // Calculer la moyenne des temps pour le fichier actuel
+        int heures_moyenne = heures_total / nombre_lignes;
+        int minutes_moyenne = minutes_total / nombre_lignes;
+        int secondes_moyenne = secondes_total / nombre_lignes;
+        int centiemes_moyenne = centiemes_total / nombre_lignes;
+
+        printf("Moyenne des temps pour le fichier %s : %02d:%02d:%02d:%02d\n", fichiers[i], heures_moyenne, minutes_moyenne, secondes_moyenne, centiemes_moyenne);
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+#include "Bibli.h"
+
 // Fonction pour lire les données d'un fichier et initialiser un Athlete
 Athlete *lireAthlete(const char *nomFichier) {
     FILE *fichier = fopen(nomFichier, "r");
@@ -135,12 +370,10 @@ int main() {
 
 
 
+// Prends les temps dans les fichiers et fait une moyenne
+
 #include "Bibli.h"
 
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 int main() {
     char *fichiers[] = {"Ademo.txt", "Adlaurent.txt", "Ali.txt", "Boulon.txt", "Brandon.txt", "Clovis.txt", "Etienne.txt", "Fujitora.txt", "Gourcuff.txt", "Ilyes.txt", "Jimmy.txt", "Kevin.txt", "Lemaître.txt", "Locqman.txt", "Mandzukic.txt", "Messi.txt", "Mkadir.txt", "Mobutu.txt", "Morant.txt", "Neji.txt", "Pablo.txt", "Pirlo.txt", "Robben.txt", "Samy.txt", "Sneijder.txt", "Stephen.txt", "Sylvestre.txt", "Yann.txt", "krilin.txt", "riman.txt"};
@@ -150,7 +383,7 @@ int main() {
     int heures_total = 0, minutes_total = 0, secondes_total = 0, centiemes_total = 0;
     int nombre_lignes = 0;
 
-    for (int i = 0; i < sizeof(fichiers) / sizeof(fichiers[0]); i++) {
+    for (int i = 0; i < 30; i++) {
         FILE *fichier = fopen(fichiers[i], "r");
 
         // Vérifier si l'ouverture a réussi
@@ -200,6 +433,153 @@ int main() {
 
 
 
+
+
+
+
+
+
+#include "Bibli.h"
+
+#define NOMBRE_ATHLETES 30
+
+typedef struct {
+    char nom[50];
+    int heures;
+    int minutes;
+    int secondes;
+    int centiemes;
+} Temps;
+
+void trier_temps(Temps temps[], int n) {
+    // Tri par insertion
+    int i, j;
+    Temps temp;
+    for (i = 1; i < n; i++) {
+        temp = temps[i];
+        j = i - 1;
+        while (j >= 0 && (temps[j].heures > temp.heures || (temps[j].heures == temp.heures && (temps[j].minutes > temp.minutes || (temps[j].minutes == temp.minutes && (temps[j].secondes > temp.secondes || (temps[j].secondes == temp.secondes && temps[j].centiemes > temp.centiemes))))))) {
+            temps[j + 1] = temps[j];
+            j = j - 1;
+        }
+        temps[j + 1] = temp;
+    }
+}
+
+void afficher_3_plus_rapides(Temps temps[], int n) {
+    printf("Les 3 athlètes les plus rapides :\n");
+    for (int i = 0; i < 3 && i < n; i++) {
+        printf("%s - Temps : %02d:%02d:%02d:%02d \n", temps[i].nom, temps[i].heures, temps[i].minutes, temps[i].secondes, temps[i].centiemes);
+    }
+    printf("\n");
+}
+
+int main() {
+    FILE *fichier;
+    char ligne[100];
+    char delimiteur[] = ";";
+    Temps relais[NOMBRE_ATHLETES], m_100[NOMBRE_ATHLETES], marathon[NOMBRE_ATHLETES], m_400[NOMBRE_ATHLETES], m_5000[NOMBRE_ATHLETES];
+    int relais_count = 0, m_100_count = 0, marathon_count = 0, m_400_count = 0, m_5000_count = 0;
+
+    char *fichiers[] = {"Ademo.txt", "Adlaurent.txt", "Ali.txt", "Boulon.txt", "Brandon.txt", "Clovis.txt", "Etienne.txt", "Fujitora.txt", "Gourcuff.txt", "Ilyes.txt", "Jimmy.txt", "Kevin.txt", "Lemaître.txt", "Locqman.txt", "Mandzukic.txt", "Messi.txt", "Mkadir.txt", "Mobutu.txt", "Morant.txt", "Neji.txt", "Pablo.txt", "Pirlo.txt", "Robben.txt", "Samy.txt", "Sneijder.txt", "Stephen.txt", "Sylvestre.txt", "Yann.txt", "krilin.txt", "riman.txt"};
+
+    for (int i = 0; i < 30; i++) {
+        fichier = fopen(fichiers[i], "r");
+
+        // Vérifier si l'ouverture a réussi
+        if (fichier == NULL) {
+            printf("Impossible d'ouvrir le fichier %s.\n", fichiers[i]);
+            continue; // Passer au fichier suivant en cas d'échec d'ouverture
+        }
+
+        // Lire chaque ligne du fichier
+        while (fgets(ligne, sizeof(ligne), fichier)) {
+            // Utilisation de strtok() pour diviser la ligne en sous-chaînes
+            char *token = strtok(ligne, delimiteur);
+
+            // Ignorer la première colonne (nom de l'athlète)
+            token = strtok(NULL, delimiteur);
+
+            // Extraire la discipline
+            char discipline[20];
+            strcpy(discipline, token);
+
+            // Ignorer la troisième colonne (temps)
+            token = strtok(NULL, delimiteur);
+
+            // Extraire le temps (heure:minute:seconde:centième)
+            token = strtok(NULL, delimiteur);
+            int heures, minutes, secondes, centiemes;
+            sscanf(token, "%d:%d:%d:%d", &heures, &minutes, &secondes, &centiemes);
+
+            // Stocker le temps dans le tableau correspondant à la discipline
+            if (strcmp(discipline, "relais") == 0) {
+                strcpy(relais[relais_count].nom, fichiers[i]);
+                relais[relais_count].heures = heures;
+                relais[relais_count].minutes = minutes;
+                relais[relais_count].secondes = secondes;
+                relais[relais_count].centiemes = centiemes;
+                relais_count++;
+            } else if (strcmp(discipline, "100m") == 0) {
+                strcpy(m_100[m_100_count].nom, fichiers[i]);
+                m_100[m_100_count].heures = heures;
+                m_100[m_100_count].minutes = minutes;
+                m_100[m_100_count].secondes = secondes;
+                m_100[m_100_count].centiemes = centiemes;
+                m_100_count++;
+            } else if (strcmp(discipline, "marathon") == 0) {
+                strcpy(marathon[marathon_count].nom, fichiers[i]);
+                marathon[marathon_count].heures = heures;
+                marathon[marathon_count].minutes = minutes;
+                marathon[marathon_count].secondes = secondes;
+                marathon[marathon_count].centiemes = centiemes;
+                marathon_count++;
+            } else if (strcmp(discipline, "4*400m") == 0) {
+                strcpy(m_400[m_400_count].nom, fichiers[i]);
+                m_400[m_400_count].heures = heures;
+                m_400[m_400_count].minutes = minutes;
+                m_400[m_400_count].secondes = secondes;
+                m_400[m_400_count].centiemes = centiemes;
+                m_400_count++;
+            } else if (strcmp(discipline, "5000m") == 0) {
+                strcpy(m_5000[m_5000_count].nom, fichiers[i]);
+                m_5000[m_5000_count].heures = heures;
+                m_5000[m_5000_count].minutes = minutes;
+                m_5000[m_5000_count].secondes = secondes;
+                m_5000[m_5000_count].centiemes = centiemes;
+                m_5000_count++;
+            }
+        }
+
+        // Fermer le fichier
+        fclose(fichier);
+    }
+
+    // Trier les temps dans chaque tableau par ordre croissant
+    trier_temps(relais, relais_count);
+    trier_temps(m_100, m_100_count);
+    trier_temps(marathon, marathon_count);
+    trier_temps(m_400, m_400_count);
+    trier_temps(m_5000, m_5000_count);
+
+    // Afficher les 3 athlètes les plus rapides dans chaque discipline
+    printf("Relais :\n");
+    afficher_3_plus_rapides(relais, relais_count);
+
+    printf("100m :\n");
+    afficher_3_plus_rapides(m_100, m_100_count);
+
+    printf("Marathon :\n");
+    afficher_3_plus_rapides(marathon, marathon_count);
+
+    printf("4*400m :\n");
+    afficher_3_plus_rapides(m_400, m_400_count);
+
+    printf("5000m :\n");
+    afficher_3_plus_rapides(m_5000, m_5000_count);
+
+    return 0;
+}
 
 
 
