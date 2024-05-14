@@ -10,10 +10,11 @@ struct Date {
 // Fonction pour demander à l'utilisateur de creer un entrainement
 Entrainement creerNouvelentrainement(){
 Entrainement nouvelentrainement;
+    int verif;
     do {
         // Demander à l'utilisateur de saisir la date au format jour/mois/année
         printf("Entrez une date au format jour/mois/année ( : ");
-        scanf("%d/%d/%d", &date.jour, &date.mois, &date.annee);
+        verif=scanf("%d/%d/%d", &date.jour, &date.mois, &date.annee);
 
         // Vérifier si la date est valide
         if ((date.jour >= 1 && date.jour <= 31) &&
@@ -21,9 +22,10 @@ Entrainement nouvelentrainement;
             (date.annee >= 2020 && date.annee <= 2024)) {
             valid = 1; // La date est valide, sortir de la boucle
         } else {
+            valid = 0;
             printf("Date invalide. Assurez-vous que le jour est entre 1 et 31, le mois est entre 1 et 12, et l'année est entre 2020 et 2024.\n");
         }
-    } while (!valid);
+    } while (valid!=1||verif!=1);
 
 printf("quel est le type d'épreuve/n");
 scanf("%c",&epreuve);
