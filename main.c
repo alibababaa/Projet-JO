@@ -1,11 +1,24 @@
 int main(){
+int verif;
 int f;
 printf("Bonjour\n");
 printf ("Que voulez-vous faire?\n");
 printf("1-entrer et sauvegarder les information d'un nouvel entrainement? \n 2-consulter l'historique des entrainement? \n 3-consulter les statistiques de performances des athletes?\n");
 scanf("%d",&f);
-if (f==1){
-    ....
+do if (f==1){
+    Entrainement nouvelentrainement;
+char ajouterenrainement;
+while(1){
+nouvelentrainement=creernouvelentrainement;
+sauvegarderentrainement(&nouvelentrainement);
+char ajouterenrainement;
+printf("voulez vous ajouter un nouvel entrainement ?/n");
+verif= scanf("%c",&ajouterentrainement);
+if(ajouterentrainement!="oui"){
+    break;
+}
+printf("votre nouvel entrainement a bien été ajouter/n");
+    
       }
       else if(f==2){
             copieinfo();
@@ -37,14 +50,13 @@ if (f==1){
                 free(athletes[i].entrainements);
                 free(athletes[i]);
             }
-             
-         ....
-             
-           }
+
+
       else{
            printf("erreur saisie");
     }
+             while(verif!=1);
   
 return 0;
 }
-
+/** **/
