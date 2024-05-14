@@ -1,3 +1,5 @@
+#include "Bibli.h"
+
 int main(){
 int verif;
 int f;
@@ -6,21 +8,21 @@ printf ("Que voulez-vous faire?\n");
 printf("1-entrer et sauvegarder les information d'un nouvel entrainement? \n 2-consulter l'historique des entrainement? \n 3-consulter les statistiques de performances des athletes?\n");
 scanf("%d",&f);
 do if (f==1){
-    Entrainement nouvelentrainement;
-char ajouterenrainement;
+    Entrainement* nouvelentrainement;
+char ajouterentrainement;
 while(1){
-nouvelentrainement=creernouvelentrainement;
-sauvegarderentrainement(&nouvelentrainement);
-char ajouterenrainement;
+nouvelentrainement=creerNouvelentrainement();
+sauvegarderentrainement(&nouvelentrainement, nouvelentrainement);
+char ajouterentrainement;
 printf("voulez vous ajouter un nouvel entrainement ?/n");
 verif= scanf("%c",&ajouterentrainement);
-if(ajouterentrainement!="oui"){
+if(ajouterentrainement!=1){
     break;
 }
 printf("votre nouvel entrainement a bien été ajouter/n");
     
       }
-      else if(f==2){
+      }else if(f==2){
             copieinfo();
     }
          else if(f==3){
@@ -39,18 +41,25 @@ printf("votre nouvel entrainement a bien été ajouter/n");
                 trouverMeilleursAthletes(nomsFichiers[i], meilleursAthletes);
                 printf("Meilleurs athlètes pour la discipline %d :\n", i+1);
                 for (int j = 0; j < 3; j++) {
-                    printf("Athlète : %s, Temps : %.2f\n", meilleursAthletes[j].nom, meilleursAthletes[j].temps[0]);
+                    printf("Athlète : %s, Temps : %.2f\n", meilleursAthletes[j]->nom, meilleursAthletes[j]->temps[0]);
                 }
             printf("\n");
             }
 
             // Libération de la mémoire allouée pour les Athletes
-            for (int i = 0; i < 30; i++) {
-                free(athletes[i].temps);
-                free(athletes[i].entrainements);
-                free(athletes[i]);
-            }
+      
+            
+for (int i = 0; i < 30; ++i) {
+    free(meilleursAthletes[i]->temps);
+    free(meilleursAthletes[i]);
+}
 
+// Libérer la mémoire pour le tableau de pointeurs vers Athlete
+free(meilleursAthletes);
+
+              
+          
+}
 
       else{
            printf("erreur saisie");
