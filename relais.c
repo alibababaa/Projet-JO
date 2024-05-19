@@ -66,31 +66,7 @@ Entrainement* creerEntrainementRelais(struct Date date) {
     return nouvelEntrainement;
 }
 
-// Fonction pour demander à l'utilisateur de créer un entrainement
-Entrainement* creerNouvelEntrainement(const char* nomFichier) {
-    Entrainement* nouvelEntrainement = (Entrainement*)malloc(sizeof(Entrainement));
-    if (!nouvelEntrainement) {
-        printf("Erreur d'allocation mémoire\n");
-        exit(1);
-    }
-
-    int valid, verif;
-    struct Date date;
-    do {
-        // Demander à l'utilisateur de saisir la date au format jour/mois/année
-        printf("Entrez une date au format jour/mois/année : ");
-        verif = scanf("%d/%d/%d", &date.jour, &date.mois, &date.annee);
-
-        // Vérifier si la date est valide
-        if ((date.jour >= 1 && date.jour <= 31) &&
-            (date.mois >= 1 && date.mois <= 12) &&
-            (date.annee >= 2020 && date.annee <= 2024) && verif == 3) {
-            valid = 1; // La date est valide, sortir de la boucle
-        } else {
-            valid = 0;
-            printf("Date invalide. Assurez-vous que le jour est entre 1 et 31, le mois est entre 1 et 12, et l'année est entre 2020 et 2024.\n");
-        }
-    } while (!valid);
+// 
 
     printf("Quel est le type d'épreuve : ");
     scanf("%s", nouvelEntrainement->epreuve);
