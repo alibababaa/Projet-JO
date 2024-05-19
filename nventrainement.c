@@ -95,7 +95,7 @@ int main(){
 Entrainement nouvelentrainement;
 char ajouterenrainement;
 while(1){
-nouvelentrainement=creernouvelentrainement;
+nouvelentrainement=creerNouvelentrainement;
 sauvegarderentrainement(&nouvelentrainement);
 char ajouterenrainement;
 printf("voulez vous ajouter un nouvel entrainement ?\n 1=oui 2=non\n");
