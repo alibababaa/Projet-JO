@@ -43,6 +43,8 @@ int main() {
     char delimiteur[] = ";";
     Temps relais[NOMBRE_ATHLETES], m_100[NOMBRE_ATHLETES], marathon[NOMBRE_ATHLETES], m_400[NOMBRE_ATHLETES], m_5000[NOMBRE_ATHLETES];
     int relais_compteur = 0, m_100_compteur = 0, marathon_compteur = 0, m_400_compteur = 0, m_5000_compteur = 0;
+    int erreurs_fichier = 0;
+    
 
     char *fichiers[] = {"Ademo.txt", "Adlaurent.txt", "Ali.txt", "Boulon.txt", "Brandon.txt", "Clovis.txt", "Etienne.txt", "Fujitora.txt", "Gourcuff.txt", "Ilyes.txt", "Jimmy.txt", "Kevin.txt", "Lemaître.txt", "Locqman.txt", "Mandzukic.txt", "Messi.txt", "Mkadir.txt", "Mobutu.txt", "Morant.txt", "Neji.txt", "Pablo.txt", "Pirlo.txt", "Robben.txt", "Samy.txt", "Sneijder.txt", "Stephen.txt", "Sylvestre.txt", "Yann.txt", "krilin.txt", "riman.txt"};
 
@@ -54,6 +56,7 @@ int main() {
         // Vérifier si l'ouverture a réussi
         if (fichier == NULL) {
             printf("Impossible d'ouvrir le fichier %s.\n", fichiers[i]);
+            erreurs_fichier++;
             continue; // Passer au fichier suivant en cas d'échec d'ouverture
         }
 
@@ -73,6 +76,11 @@ int main() {
             token = strtok(NULL, delimiteur);
             int heures, minutes, secondes, centiemes;
             sscanf(token, "%d:%d:%d:%d", &heures, &minutes, &secondes, &centiemes);
+
+            if (heures < 0 || heures >= 24 || minutes < 0 || minutes >= 60 || secondes < 0 || secondes >= 60 || centiemes < 0 || centiemes >= 100) {
+                printf("Valeurs de temps invalides dans le fichier %s : %s\n", fichiers[i], ligne);
+                continue;
+            }
 
             // Stocker le temps dans le tableau correspondant à la discipline
             if (strcmp(discipline, "relais") == 0) {
