@@ -15,5 +15,5 @@ nventrainement.o: nventrainement.c Bibli.h
 relais.o: relais.c Bibli.h
 	gcc -c $< -o $@
 
-JO: main.o 3bestatlhetes.o Historique.o nouvelentrainement.o
+JO: main.o 3bestatlhetes.o Historique.o nventrainement.o relais.o
 	gcc $^ -o $@
