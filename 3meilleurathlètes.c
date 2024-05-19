@@ -46,6 +46,8 @@ int main() {
 
     char *fichiers[] = {"Ademo.txt", "Adlaurent.txt", "Ali.txt", "Boulon.txt", "Brandon.txt", "Clovis.txt", "Etienne.txt", "Fujitora.txt", "Gourcuff.txt", "Ilyes.txt", "Jimmy.txt", "Kevin.txt", "Lemaître.txt", "Locqman.txt", "Mandzukic.txt", "Messi.txt", "Mkadir.txt", "Mobutu.txt", "Morant.txt", "Neji.txt", "Pablo.txt", "Pirlo.txt", "Robben.txt", "Samy.txt", "Sneijder.txt", "Stephen.txt", "Sylvestre.txt", "Yann.txt", "krilin.txt", "riman.txt"};
 
+
+    // Ouverture et lecture de fichier, extrait la donnée temps des fichiers et les stocke dans le tableau approprié
     for (int i = 0; i < 30; i++) {
         fichier = fopen(fichiers[i], "r");
 
@@ -67,9 +69,6 @@ int main() {
             char discipline[20];
             strcpy(discipline, token);
 
-            // Ignorer la troisième colonne (temps)
-            token = strtok(NULL, delimiteur);
-
             // Extraire le temps (heure:minute:seconde:centième)
             token = strtok(NULL, delimiteur);
             int heures, minutes, secondes, centiemes;
@@ -83,28 +82,32 @@ int main() {
                 relais[relais_compteur].secondes = secondes;
                 relais[relais_compteur].centiemes = centiemes;
                 relais_compteur++;
-            } else if (strcmp(discipline, "100m") == 0) {
+            } 
+             else if (strcmp(discipline, "100m") == 0) {
                 strcpy(m_100[m_100_compteur].nom, fichiers[i]);
                 m_100[m_100_compteur].heures = heures;
                 m_100[m_100_compteur].minutes = minutes;
                 m_100[m_100_compteur].secondes = secondes;
                 m_100[m_100_compteur].centiemes = centiemes;
                 m_100_compteur++;
-            } else if (strcmp(discipline, "marathon") == 0) {
+            } 
+            else if (strcmp(discipline, "marathon") == 0) {
                 strcpy(marathon[marathon_compteur].nom, fichiers[i]);
                 marathon[marathon_compteur].heures = heures;
                 marathon[marathon_compteur].minutes = minutes;
                 marathon[marathon_compteur].secondes = secondes;
                 marathon[marathon_compteur].centiemes = centiemes;
                 marathon_compteur++;
-            } else if (strcmp(discipline, "4*400m") == 0) {
+            } 
+            else if (strcmp(discipline, "4*400m") == 0) {
                 strcpy(m_400[m_400_compteur].nom, fichiers[i]);
                 m_400[m_400_compteur].heures = heures;
                 m_400[m_400_compteur].minutes = minutes;
                 m_400[m_400_compteur].secondes = secondes;
                 m_400[m_400_compteur].centiemes = centiemes;
                 m_400_compteur++;
-            } else if (strcmp(discipline, "5000m") == 0) {
+            } 
+            else if (strcmp(discipline, "5000m") == 0) {
                 strcpy(m_5000[m_5000_compteur].nom, fichiers[i]);
                 m_5000[m_5000compteur].heures = heures;
                 m_5000[m_5000_compteur].minutes = minutes;
