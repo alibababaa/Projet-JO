@@ -9,7 +9,10 @@ main.o: main.c Bibli.h
 Historique.o: Historique.c Bibli.h
 	gcc -c $< -o $@
 
-nouvelentrainement.o: nouvelentrainement.c Bibli.h
+nventrainement.o: nventrainement.c Bibli.h
+	gcc -c $< -o $@
+
+relais.o: relais.c Bibli.h
 	gcc -c $< -o $@
 
 JO: main.o 3bestatlhetes.o Historique.o nouvelentrainement.o
