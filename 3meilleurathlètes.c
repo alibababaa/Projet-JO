@@ -11,7 +11,7 @@ typedef struct {
 } Temps;
 
 
-//Tri par insertion
+//Tri par insertion de temps
 void trier_temps(Temps temps[], int n) {
     // Tri par insertion
     int i, j;
@@ -27,6 +27,7 @@ void trier_temps(Temps temps[], int n) {
     }
 }
 
+// Affiche 3 athlètes les plus rapides à partir d'un tableau de temps
 void afficher_3_plus_rapides(Temps temps[], int n) {
     printf("Les 3 athlètes les plus rapides :\n");
     for (int i = 0; i < 3 && i < n; i++) {
@@ -35,12 +36,13 @@ void afficher_3_plus_rapides(Temps temps[], int n) {
     printf("\n");
 }
 
+
 int main() {
     FILE *fichier;
     char ligne[100];
     char delimiteur[] = ";";
     Temps relais[NOMBRE_ATHLETES], m_100[NOMBRE_ATHLETES], marathon[NOMBRE_ATHLETES], m_400[NOMBRE_ATHLETES], m_5000[NOMBRE_ATHLETES];
-    int relais_count = 0, m_100_count = 0, marathon_count = 0, m_400_count = 0, m_5000_count = 0;
+    int relais_compteur = 0, m_100_compteur = 0, marathon_compteur = 0, m_400_compteur = 0, m_5000_compteur = 0;
 
     char *fichiers[] = {"Ademo.txt", "Adlaurent.txt", "Ali.txt", "Boulon.txt", "Brandon.txt", "Clovis.txt", "Etienne.txt", "Fujitora.txt", "Gourcuff.txt", "Ilyes.txt", "Jimmy.txt", "Kevin.txt", "Lemaître.txt", "Locqman.txt", "Mandzukic.txt", "Messi.txt", "Mkadir.txt", "Mobutu.txt", "Morant.txt", "Neji.txt", "Pablo.txt", "Pirlo.txt", "Robben.txt", "Samy.txt", "Sneijder.txt", "Stephen.txt", "Sylvestre.txt", "Yann.txt", "krilin.txt", "riman.txt"};
 
@@ -75,40 +77,40 @@ int main() {
 
             // Stocker le temps dans le tableau correspondant à la discipline
             if (strcmp(discipline, "relais") == 0) {
-                strcpy(relais[relais_count].nom, fichiers[i]);
-                relais[relais_count].heures = heures;
-                relais[relais_count].minutes = minutes;
-                relais[relais_count].secondes = secondes;
-                relais[relais_count].centiemes = centiemes;
-                relais_count++;
+                strcpy(relais[relais_compteur].nom, fichiers[i]);
+                relais[relais_compteur].heures = heures;
+                relais[relais_compteur].minutes = minutes;
+                relais[relais_compteur].secondes = secondes;
+                relais[relais_compteur].centiemes = centiemes;
+                relais_compteur++;
             } else if (strcmp(discipline, "100m") == 0) {
-                strcpy(m_100[m_100_count].nom, fichiers[i]);
-                m_100[m_100_count].heures = heures;
-                m_100[m_100_count].minutes = minutes;
-                m_100[m_100_count].secondes = secondes;
-                m_100[m_100_count].centiemes = centiemes;
-                m_100_count++;
+                strcpy(m_100[m_100_compteur].nom, fichiers[i]);
+                m_100[m_100_compteur].heures = heures;
+                m_100[m_100_compteur].minutes = minutes;
+                m_100[m_100_compteur].secondes = secondes;
+                m_100[m_100_compteur].centiemes = centiemes;
+                m_100_compteur++;
             } else if (strcmp(discipline, "marathon") == 0) {
-                strcpy(marathon[marathon_count].nom, fichiers[i]);
-                marathon[marathon_count].heures = heures;
-                marathon[marathon_count].minutes = minutes;
-                marathon[marathon_count].secondes = secondes;
-                marathon[marathon_count].centiemes = centiemes;
-                marathon_count++;
+                strcpy(marathon[marathon_compteur].nom, fichiers[i]);
+                marathon[marathon_compteur].heures = heures;
+                marathon[marathon_compteur].minutes = minutes;
+                marathon[marathon_compteur].secondes = secondes;
+                marathon[marathon_compteur].centiemes = centiemes;
+                marathon_compteur++;
             } else if (strcmp(discipline, "4*400m") == 0) {
-                strcpy(m_400[m_400_count].nom, fichiers[i]);
-                m_400[m_400_count].heures = heures;
-                m_400[m_400_count].minutes = minutes;
-                m_400[m_400_count].secondes = secondes;
-                m_400[m_400_count].centiemes = centiemes;
-                m_400_count++;
+                strcpy(m_400[m_400_compteur].nom, fichiers[i]);
+                m_400[m_400_compteur].heures = heures;
+                m_400[m_400_compteur].minutes = minutes;
+                m_400[m_400_compteur].secondes = secondes;
+                m_400[m_400_compteur].centiemes = centiemes;
+                m_400_compteur++;
             } else if (strcmp(discipline, "5000m") == 0) {
-                strcpy(m_5000[m_5000_count].nom, fichiers[i]);
-                m_5000[m_5000_count].heures = heures;
-                m_5000[m_5000_count].minutes = minutes;
-                m_5000[m_5000_count].secondes = secondes;
-                m_5000[m_5000_count].centiemes = centiemes;
-                m_5000_count++;
+                strcpy(m_5000[m_5000_compteur].nom, fichiers[i]);
+                m_5000[m_5000compteur].heures = heures;
+                m_5000[m_5000_compteur].minutes = minutes;
+                m_5000[m_5000_compteur].secondes = secondes;
+                m_5000[m_5000_compteur].centiemes = centiemes;
+                m_5000_compteur++;
             }
         }
 
@@ -117,27 +119,27 @@ int main() {
     }
 
     // Trier les temps dans chaque tableau par ordre croissant
-    trier_temps(relais, relais_count);
-    trier_temps(m_100, m_100_count);
-    trier_temps(marathon, marathon_count);
-    trier_temps(m_400, m_400_count);
-    trier_temps(m_5000, m_5000_count);
+    trier_temps(relais, relais_compteur);
+    trier_temps(m_100, m_100_compteur);
+    trier_temps(marathon, marathon_compteur);
+    trier_temps(m_400, m_400_compteur);
+    trier_temps(m_5000, m_5000_compteur);
 
     // Afficher les 3 athlètes les plus rapides dans chaque discipline
     printf("Relais :\n");
-    afficher_3_plus_rapides(relais, relais_count);
+    afficher_3_plus_rapides(relais, relais_compteur);
 
     printf("100m :\n");
-    afficher_3_plus_rapides(m_100, m_100_count);
+    afficher_3_plus_rapides(m_100, m_100_compteur);
 
     printf("Marathon :\n");
-    afficher_3_plus_rapides(marathon, marathon_count);
+    afficher_3_plus_rapides(marathon, marathon_compteur);
 
     printf("4*400m :\n");
-    afficher_3_plus_rapides(m_400, m_400_count);
+    afficher_3_plus_rapides(m_400, m_400_compteur);
 
     printf("5000m :\n");
-    afficher_3_plus_rapides(m_5000, m_5000_count);
+    afficher_3_plus_rapides(m_5000, m_5000_compteur);
 
     return 0;
 }
