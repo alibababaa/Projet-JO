@@ -8,10 +8,10 @@ printf ("Que voulez-vous faire?\n");
 printf("1-entrer et sauvegarder les information d'un nouvel entrainement? \n 2-consulter l'historique des entrainement? \n 3-consulter les statistiques de performances des athletes?\n");
 scanf("%d",&f);
 do if (f==1){
-    Entrainement* nouvelentrainement;
+    Entrainement nouvelentrainement;
 char ajouterentrainement;
 while(1){
-nouvelentrainement=creerNouvelentrainement();
+nouvelentrainement = creerNouvelentrainement();
 sauvegarderentrainement(&nouvelentrainement, nouvelentrainement);
 char ajouterentrainement;
 printf("voulez vous ajouter un nouvel entrainement ?/n");
