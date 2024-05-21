@@ -1,6 +1,11 @@
 #include "Bibli.h"
 
 void resumePerformance(const char *nomFichier) {
+
+  int meilleurtemps;
+  int piretemps;
+  int moyennetemps;
+  
   FILE *fichier = fopen(nomFichier, "r");
     if (fichier == NULL) {
         printf("Erreur lors de l'ouverture du fichier");
@@ -8,6 +13,8 @@ void resumePerformance(const char *nomFichier) {
     }
 
 
+  meilleurtemps=
+  
   printf("Meilleur temps = %d : %d : %d \n", 
   printf("Pire temps = %d : %d : %d \n", 
   printf("Moyenne des temps = %d : %d : %d \n", 
