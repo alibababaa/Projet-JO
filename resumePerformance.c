@@ -93,9 +93,13 @@ void resumePerformance(const char *nomFichier) {
 
 int main() {
     // Exemple d'utilisation de la fonction resumePerformance
+    char prenom[30]= {Ademo, Adlaurent Ali, Boulon, Brandon, Clovis, Etienne, Fujitora, Gourcuff, Ilyes, Jimmy, Kevin, Lemaître, Locqman, Mandzukic, Messi, Mkadir, Mobutu, Morant, Neji, Pablo, Pirlo, Robben, Samy, Sneijder, Stephen, Sylvestre, Yann, krilin, riman};
     int athlèteResume;
     printf("De quel athlète voulez vous le résumé ?\n);
     scanf("%d \n", &athleteResume)
+    while(athleteResume != prenom[]);
+        printf("Erreur de saisie de prénom \n");
+    }
     resumePerformance(athleteResume);
     return 0;
 }
