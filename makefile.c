@@ -3,17 +3,17 @@ all: JO
 main.o: main.c Bibli.h
 	gcc -c $< -o $@
 
-3bestatlhetes.o: 3bestatlhetes.c Bibli.h
+3meilleurathlètes.o: 3meilleurathlètes.c Bibli.h
 	gcc -c $< -o $@
 
 Historique.o: Historique.c Bibli.h
 	gcc -c $< -o $@
 
-nventrainement.o: nventrainement.c Bibli.h
+nouvelentrainement.o: nouvelentrainement.c Bibli.h
 	gcc -c $< -o $@
 
 relais.o: relais.c Bibli.h
 	gcc -c $< -o $@
 
-JO: main.o 3bestatlhetes.o Historique.o nventrainement.o relais.o
+JO: main.o 3meilleurathlètes.o Historique.o nouvelentrainement.o relais.o
 	gcc $^ -o $@
