@@ -64,3 +64,4 @@ Athlete* lireAthlete(const char* nomFichier);
 void trouverMeilleursAthletes(const char* nomFichier, Athlete* meilleursAthletes[3]);
 int verifierRelaisExistant(const char* nomFichier, Date date);
 Entrainement* creerEntrainementRelais(Date date);
+ char* nomEpreuve[];
