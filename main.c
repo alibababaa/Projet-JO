@@ -1,9 +1,15 @@
 #include "Bibli.h"
- char* nomEpreuve[] = {
-    "Invalid",
-    "100m", "400m", "5000m", "marathon", "4*400m"
+
+const char* nomEpreuve[] = {
+    "100m",
+    "400m",
+    "5000m",
+    "marathon",
+    "4*400m"
 };
+
 int main() {
+ 
     int choix;
     printf("Bonjour\n");
     printf("Que voulez-vous faire?\n");
@@ -25,8 +31,39 @@ int main() {
         }
     }
     else if (choix == 2) {
-        copieinfo();
-    }
+     printf("Début du programme...\n");
+
+    printf("Chargement des données des athlètes...\n");
+    int nb_athletes = 0;
+        
+        // Demande à l'entraîneur de saisir le nombre d'athlètes
+        printf("Combien d'athlètes voulez-vous charger ? (maximum 30) : ");
+        scanf("%d", &nb_athletes);
+        getchar(); // Pour absorber le caractère de nouvelle ligne restant dans le tampon
+        
+        Athlete athletes[100];
+        
+        // Demande à l'entraîneur de saisir le nom de chaque athlète
+        for (int i = 0; i < nb_athletes; i++) {
+            printf("Entrez le nom de l'athlète %d : ", i + 1);
+            fgets(athletes[i].nom, sizeof(athletes[i].nom), stdin);
+            // Supprimer le caractère de nouvelle ligne (\n) à la fin du nom
+            athletes[i].nom[strcspn(athletes[i].nom, "\n")] = '\0';
+        }
+
+        // Chargement des données pour chaque athlète
+        for (int i = 0; i < nb_athletes; i++) {
+            char nom_fichier[100];
+            sprintf(nom_fichier, "%s.txt", athletes[i].nom);
+            chargerDonneesAthlete(&athletes[i], nom_fichier);
+        }
+
+  
+       //copieinfo();
+       
+        printf("Fin du programme.\n");
+   }    
+    
     else if (choix == 3) {
         // Noms des fichiers des athlètes
         const char* nomsFichiers[] = {
