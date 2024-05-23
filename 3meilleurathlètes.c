@@ -1,6 +1,101 @@
-/**#include "Bibli.h"
+#include "Bibli.h"
 
-// Fonction pour lire les données d'un fichier et initialiser un Athlete
+Athlete* lireAthlete(const char* nomFichier) {
+    FILE* fichier = fopen(nomFichier, "r");
+    if (fichier == NULL) {
+        printf("Erreur lors de l'ouverture du fichier\n");
+        exit(1);
+    }
+
+    // Création d'un Athlete
+    Athlete* athlete = (Athlete*)malloc(sizeof(Athlete));
+    if (athlete == NULL) {
+        printf("Erreur lors de l'allocation de la mémoire pour l'athlète\n");
+        exit(1);
+    }
+
+    // Lecture du nom de l'athlète à partir du nom du fichier
+    char nomAthlete[50];
+    strcpy(nomAthlete, nomFichier);
+    strtok(nomAthlete, ".");  // strtok: extrait le nom de l'athlète du nom du fichier (sépare en morceau grâce à un ".")
+    strcpy(athlete->nom, nomAthlete);
+
+    // Initialisation du tableau des temps
+    athlete->temps = NULL;
+
+    // Initialisation du nombre d'entraînements à 0
+    athlete->num_entrainement = 0;
+
+    // Lecture des données du fichier
+    Entrainement entrainements[20]; // Supposant qu'il n'y a pas plus de 20 entraînements par athlète
+    int i = 0;
+    while (fscanf(fichier, "%d/%d/%d %d %f %d",
+                  &entrainements[i].date.jour,
+                  &entrainements[i].date.mois,
+                  &entrainements[i].date.annee,
+                  (int*)&entrainements[i].epreuve,
+                  &entrainements[i].temps,
+                  &entrainements[i].position) == 6) {
+        i++;
+    }
+    athlete->num_entrainement = i;
+
+    // Allocation de la mémoire pour le tableau des temps
+    athlete->temps = (float*)malloc(i * sizeof(float));
+    if (athlete->temps == NULL) {
+        printf("Erreur lors de l'allocation de la mémoire pour les temps de l'athlète\n");
+        exit(1);
+    }
+
+    // Stockage des temps dans le tableau des temps
+    for (int j = 0; j < i; j++) {
+        athlete->temps[j] = entrainements[j].temps;
+    }
+
+    // Fermeture du fichier
+    fclose(fichier);
+
+    return athlete;
+}
+
+void trouverMeilleursAthletes(const char* nomFichier, Athlete* meilleursAthletes[3]) {
+    FILE* fichier = fopen(nomFichier, "r");
+    if (fichier == NULL) {
+        printf("Erreur lors de l'ouverture du fichier\n");
+        exit(1);
+    }
+
+    Athlete* meilleurs[5][3] = { NULL };
+
+    char date[11];
+    int epreuve;
+    float temps;
+    int position;
+
+    while (fscanf(fichier, "%s %d %f %d", date, &epreuve, &temps, &position) == 4) {
+        int index = epreuve;
+        if (meilleurs[index][0] == NULL || temps < meilleurs[index][0]->temps[0]) {
+            meilleurs[index][2] = meilleurs[index][1];
+            meilleurs[index][1] = meilleurs[index][0];
+            meilleurs[index][0] = lireAthlete(nomFichier);
+        }
+        else if (meilleurs[index][1] == NULL || temps < meilleurs[index][1]->temps[0]) {
+            meilleurs[index][2] = meilleurs[index][1];
+            meilleurs[index][1] = lireAthlete(nomFichier);
+        }
+        else if (meilleurs[index][2] == NULL || temps < meilleurs[index][2]->temps[0]) {
+            meilleurs[index][2] = lireAthlete(nomFichier);
+        }
+    }
+
+    fclose(fichier);
+
+    for (int i = 0; i < 3; i++) {
+        meilleursAthletes[i] = meilleurs[0][i];
+    }
+}
+
+/**// Fonction pour lire les données d'un fichier et initialiser un Athlete
 Athlete *lireAthlete(const char *nomFichier) {
     FILE *fichier = fopen(nomFichier, "r");
     if (fichier == NULL) {
@@ -136,7 +231,7 @@ void trouverMeilleursAthletes(const char *nomFichier, Athlete *meilleursAthletes
 }
 
 float relais[6]
-**/
+
 
 
 #include "Bibli.h"
@@ -187,7 +282,7 @@ void trouverMeilleursAthletes(const char *nomFichier, Athlete *meilleursAthletes
     }
 
 }
-
+**/
 
 
 
