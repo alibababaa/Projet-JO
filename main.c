@@ -1,4 +1,8 @@
 #include "Bibli.h"
+ char* nomEpreuve[] = {
+    "Invalid",
+    "100m", "400m", "5000m", "marathon", "4*400m"
+};
 int main() {
     int choix;
     printf("Bonjour\n");
