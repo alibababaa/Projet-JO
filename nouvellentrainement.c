@@ -24,50 +24,41 @@ Entrainement creerNouvelEntrainement() {
 
     printf("Quel est le type d'épreuve (0:100m, 1:400m, 2:5000m, 3:marathon, 4:4*400m) : ");
     int epreuve;
-    scanf("%d", &epreuve);
-    nouvelEntrainement.epreuve = (Epreuve)epreuve;
-
-    if (epreuve < 0 || epreuve > 4) {
+    verif = scanf("%d", &epreuve);
+    if (epreuve < 0 || epreuve > 4 || verif != 1) {
         printf("Erreur de saisie\n");
         exit(1);
     }
 
-    printf("Saisir le temps de l'athlete (en secondes) : ");
-    scanf("%f", &nouvelEntrainement.temps);
+    nouvelEntrainement.epreuve = (Epreuve)epreuve;
 
     if (nouvelEntrainement.epreuve == epreuveE) {
-        printf("Quelle était la position de l'athlete : ");
-        verif = scanf("%d", &nouvelEntrainement.position);
-        if (nouvelEntrainement.position < 1 || nouvelEntrainement.position > 4 || verif != 1) {
-            printf("Erreur de saisie, veuillez saisir un chiffre entre 1 et 4\n");
+        // Vérifier s'il y a déjà un entrainement de relais à cette date
+        if (verifierRelaisExistant("entrainements.txt", date)) {
+            printf("Un entrainement de relais existe déjà pour cette date. Saisie annulée.\n");
+            return creerNouvelEntrainement();
+        } else {
+            Entrainement* relaisEntrainement = creerEntrainementRelais(date);
+            if (relaisEntrainement == NULL) {
+                return creerNouvelEntrainement();
+            }
+            nouvelEntrainement = *relaisEntrainement;
+            free(relaisEntrainement);
+        }
+    } else {
+        printf("Saisir le temps de l'athlete (en secondes) : ");
+        verif = scanf("%f", &nouvelEntrainement.temps);
+
+        if (verif != 1) {
+            printf("Erreur de saisie\n");
             exit(1);
         }
-    }
-    else {
+
         nouvelEntrainement.position = -1; // Position non applicable
     }
 
     return nouvelEntrainement;
 }
-
-// Fonction pour enregistrer le nouvel entrainement dans un fichier
-void sauvegarderEntrainement(const char* nomFichier, Entrainement entrainement) {
-    FILE* fichier = fopen(nomFichier, "a");
-    if (fichier == NULL) {
-        printf("Erreur : impossible d'ouvrir le fichier\n");
-        return;
-    }
-    fprintf(fichier, "%02d/%02d/%d %d %.2f %d\n",
-            entrainement.date.jour,
-            entrainement.date.mois,
-            entrainement.date.annee,
-            entrainement.epreuve,
-            entrainement.temps,
-            entrainement.position);
-    fclose(fichier);
-    printf("Votre entrainement a bien été sauvegardé\n");
-}
-
 
 /**
 Entrainement* creerNouvelEntrainement() {
