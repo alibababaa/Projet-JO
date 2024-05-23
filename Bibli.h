@@ -19,14 +19,6 @@ typedef enum {
     epreuveE  //"4*400m"
 } Epreuve;
 
-// Tableau de noms d'épreuves correspondant à l'énumération
-const char* nomEpreuve[] = {
-    "100m",
-    "400m",
-    "5000m",
-    "marathon",
-    "4*400m"
-};
 
 // Structure pour stocker la date
 typedef struct {
@@ -52,7 +44,7 @@ typedef struct {
 } Athlete;
 
 // Prototypes des fonctions
- char* nomEpreuve[];
+extern const char* nomEpreuve[];
 float Tempsmoyen();
 void tabAthlete();
 void copieinfo();
@@ -65,3 +57,5 @@ Athlete* lireAthlete(const char* nomFichier);
 void trouverMeilleursAthletes(const char* nomFichier, Athlete* meilleursAthletes[3]);
 int verifierRelaisExistant(const char* nomFichier, Date date);
 Entrainement* creerEntrainementRelais(Date date);
+void chargerDonneesAthlete(Athlete* athlete, const char* nom_fichier);
+
