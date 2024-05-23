@@ -1,3 +1,4 @@
+#include "Bibli.h"
 // Fonction pour enregistrer le nouvel entrainement dans un fichier
 void sauvegarderEntrainement(const char* nomFichier, Entrainement entrainement) {
     FILE* fichier = fopen(nomFichier, "a");
