@@ -3,6 +3,12 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
+typedef struct {
+    int heure;
+    int minutes;
+    int secondes;
+    int millisecondes;
+} Heure;
 
 // Structure pour stocker les différentes épreuves
 typedef enum {
