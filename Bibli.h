@@ -52,6 +52,7 @@ typedef struct {
 } Athlete;
 
 // Prototypes des fonctions
+ char* nomEpreuve[];
 float Tempsmoyen();
 void tabAthlete();
 void copieinfo();
@@ -64,4 +65,3 @@ Athlete* lireAthlete(const char* nomFichier);
 void trouverMeilleursAthletes(const char* nomFichier, Athlete* meilleursAthletes[3]);
 int verifierRelaisExistant(const char* nomFichier, Date date);
 Entrainement* creerEntrainementRelais(Date date);
- char* nomEpreuve[];
