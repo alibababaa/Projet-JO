@@ -1,5 +1,6 @@
 #include"Bibli.h"
 
+/**
 Entrainement* creerNouvelEntrainement() {
     Entrainement* nouvelEntrainement = (Entrainement*)malloc(sizeof(Entrainement));
     if (!nouvelEntrainement) {
@@ -101,7 +102,7 @@ int main() {
     } while (ajouterEntrainement == '1');
 
     return 0;
-}
+}**/
 
 
     
