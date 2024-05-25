@@ -1,5 +1,7 @@
-#include "Bibli.h"
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <limits.h>
 
 typedef struct {
     char nom[50];
@@ -8,7 +10,6 @@ typedef struct {
     int secondes;
     int centiemes;
 } Temps;
-
 
 // Convertit les heures, minutes, secondes et centièmes en une seule valeur en centièmes de seconde.
 int convertionEnCentiemes(int heures, int minutes, int secondes, int centiemes) {
@@ -24,7 +25,6 @@ void convertionDesCentiemes(int totalCentiemes, int *heures, int *minutes, int *
     *secondes = totalCentiemes / 100;
     *centiemes = totalCentiemes % 100;
 }
-
 
 void resumePerformance(const char *nomFichier) {
     int meilleurtemps = INT_MAX;
@@ -92,15 +92,35 @@ void resumePerformance(const char *nomFichier) {
 }
 
 int main() {
-    // Exemple d'utilisation de la fonction resumePerformance
-    char prenom[30]= {Ademo, Adlaurent Ali, Boulon, Brandon, Clovis, Etienne, Fujitora, Gourcuff, Ilyes, Jimmy, Kevin, Lemaître, Locqman, Mandzukic, Messi, Mkadir, Mobutu, Morant, Neji, Pablo, Pirlo, Robben, Samy, Sneijder, Stephen, Sylvestre, Yann, krilin, riman};
-    int athlèteResume;
-    printf("De quel athlète voulez vous le résumé ?\n);
-    scanf("%d \n", &athleteResume)
-    while(athleteResume != prenom[]);
-        printf("Erreur de saisie de prénom \n");
+    // Liste des prénoms des athlètes
+    char *prenoms[] = {
+        "Ademo", "Adlaurent", "Ali", "Bolt", "Brandon", "Clovis", "Etienne", "Fujitora",
+        "Gourcuff", "Ilyes", "Jimmy", "Kevin", "Krilin", "Lemaître", "Locqman", "Mandzukic",
+        "Messi", "Mkadir", "Mobutu", "Morant", "Neji", "Pablo", "Pirlo", "Robben",
+        "Samy", "Sneijder", "Stephen", "Sylvestre", "Yann",  "Riman"};
+        
+    int nombreAthletes = sizeof(prenoms) / sizeof(prenoms[0]);
+
+    int athleteResume;
+    char nomFichier[100];
+
+    printf("De quel athlète voulez-vous le résumé ?\n");
+    for (int i = 0; i < nombreAthletes; i++) {
+        printf("%d: %s\n", i + 1, prenoms[i]);
     }
-    resumePerformance(athleteResume);
+
+    printf("Entrez le numéro correspondant à l'athlète: ");
+    scanf("%d", &athleteResume);
+
+    if (athleteResume < 1 || athleteResume > nombreAthletes) {
+        printf("Erreur de saisie de numéro.\n");
+        return 1;
+    }
+
+    snprintf(nomFichier, sizeof(nomFichier), "%s.txt", prenoms[athleteResume - 1]);
+
+    resumePerformance(nomFichier);
+
     return 0;
 }
 
@@ -111,67 +131,6 @@ int main() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#include "Bibli.h"
-
-
-typedef struct {
-    char nom[50];
-    int heures;
-    int minutes;
-    int secondes;
-    int centiemes;
-} Temps;
-
-
-void resumePerformance(const char *nomFichier) {
-
-  int meilleurtemps;
-  int piretemps;
-  int moyennetemps;
-  
-  FILE *fichier = fopen(nomFichier, "r");
-    if (fichier == NULL) {
-        printf("Erreur lors de l'ouverture du fichier");
-        exit(1);
-    }
-
-
-  meilleurtemps=
-  
-  printf("Meilleur temps = %d : %d : %d \n", 
-  printf("Pire temps = %d : %d : %d \n", 
-  printf("Moyenne des temps = %d : %d : %d \n", 
-
-  
-}
 
 
 
