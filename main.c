@@ -18,17 +18,22 @@ int main() {
     printf("3- Consulter les statistiques de performances des athlètes?\n");
     scanf("%d", &choix);
 
+   
     if (choix == 1) {
         while (1) {
             Entrainement nouvelEntrainement = creerNouvelEntrainement();
             sauvegarderEntrainement("entrainements.txt", nouvelEntrainement);
-            char ajouterEntrainement;
-            printf("Voulez-vous ajouter un nouvel entrainement (y/n) ? ");
-            scanf(" %c", &ajouterEntrainement); // Espace avant %c pour consommer le caractère de nouvelle ligne
-            if (ajouterEntrainement != 'y') {
+
+            char ajouterEntrainement[4]; // Utiliser un tableau de char pour stocker la réponse
+            printf("Voulez-vous ajouter un nouvel entraînement (oui/non) ? ");
+            scanf("%3s", ajouterEntrainement); // Lire au maximum 3 caractères pour éviter le dépassement de tampon
+
+            if (strcmp(ajouterEntrainement, "oui") != 0) {
                 break;
             }
-        }
+    
+
+    }
     }
     else if (choix == 2) {
      printf("Début du programme...\n");
@@ -169,3 +174,7 @@ free(meilleursAthletes);
   
 return 0;
 }**/
+
+    
+
+       
