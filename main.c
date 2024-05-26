@@ -70,7 +70,12 @@ int main() {
    }    
     
     else if (choix == 3) {
-        FILE *fichier;
+        int stat;
+        printf("Que voulez-vous voir? \n");
+        printf("1- Voir les 3 meilleurs athlètes \n");
+        printf("2- Voir un résumé des performances des athlètes \n");
+        scanf
+    FILE *fichier;
     char ligne[100];
     const char delimiteur[] = "; ";
     Temps relais[NOMBRE_ATHLETES], m_100[NOMBRE_ATHLETES], marathon[NOMBRE_ATHLETES], m_400[NOMBRE_ATHLETES], m_5000[NOMBRE_ATHLETES];
