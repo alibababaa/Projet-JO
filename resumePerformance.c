@@ -85,7 +85,7 @@ int main() {
     // Liste des prénoms des athlètes
     char *prenoms[] = {
         "Ademo", "Adlaurent", "Ali", "Bolt", "Brandon", "Clovis", "Etienne", "Fujitora",
-        "Gourcuff", "Ilyes", "Jimmy", "Kevin", "Krilin", "Lemaître", "Locqman", "Mandzukic",
+        "Gourcuff", "Ilyes", "Jimmy", "Kevin", "Krilin", "Lemaitre", "Locqman", "Mandzukic",
         "Messi", "Mkadir", "Mobutu", "Morant", "Neji", "Pablo", "Pirlo", "Robben",
         "Samy", "Sneijder", "Stephen", "Sylvestre", "Yann",  "Riman"};
         
@@ -203,7 +203,7 @@ int main() {
     // Liste des prénoms des athlètes
     const char *prenoms[] = {
         "Ademo", "Adlaurent", "Ali", "Bolt", "Brandon", "Clovis", "Etienne", "Fujitora",
-        "Gourcuff", "Ilyes", "Jimmy", "Kevin", "Krilin", "Lemaître", "Locqman", "Mandzukic",
+        "Gourcuff", "Ilyes", "Jimmy", "Kevin", "Krilin", "Lemaitre", "Locqman", "Mandzukic",
         "Messi", "Mkadir", "Mobutu", "Morant", "Neji", "Pablo", "Pirlo", "Robben",
         "Samy", "Sneijder", "Stephen", "Sylvestre", "Yann", "Riman"
     };
