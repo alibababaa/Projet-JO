@@ -1,12 +1,5 @@
 #include "Bibli.h"
 
-typedef struct {
-    char nom[50];
-    int heures;
-    int minutes;
-    int secondes;
-    int centiemes;
-} Temps;
 
 // Convertit les heures, minutes, secondes et centièmes en une seule valeur en centièmes de seconde.
 int convertionEnCentiemes(int heures, int minutes, int secondes, int centiemes) {
