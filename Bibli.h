@@ -64,14 +64,10 @@ typedef struct {
 extern const char* nomEpreuve[];
 float Tempsmoyen();
 void tabAthlete();
-//void copieinfo();
+void copieinfo();
 void afficherHistorique(Athlete athlete);
-//void meilleursAthlete(Athlete a, Athlete b, Athlete c, Athlete autres, Athlete* top3);
-//float evolutionPerformance(const char* nomFichier, const char* date1, const char* date2);
 Entrainement creerNouvelEntrainement();
 void sauvegarderEntrainement(const char* nomFichier, Entrainement entrainement);
-//Athlete* lireAthlete(const char* nomFichier);
-//void trouverMeilleursAthletes(const char* nomFichier, Athlete* meilleursAthletes[3]);
 int verifierRelaisExistant(const char* nomFichier, Date date);
 Entrainement* creerEntrainementRelais(Date date);
 void chargerDonneesAthlete(Athlete* athlete, const char* nom_fichier);
