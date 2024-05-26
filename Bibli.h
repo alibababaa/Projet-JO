@@ -5,7 +5,8 @@
 #include <math.h>
 #include <limits.h>
 
-
+#define MAX_ENTRAINEMENTS 100     // Nombre maximum d'entraînements qu'un athlète peut avoir
+#define MAX_LONGUEUR_LIGNE 100    // Longueur maximale d'une ligne lue dans le fichier
 #define NOMBRE_ATHLETES 30
 #define MAX_NOM_ATHLETE 50
 
