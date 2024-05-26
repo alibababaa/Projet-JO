@@ -35,7 +35,7 @@ int main() {
 
     }
     }
-    else if (choix == 2) {
+   /** else if (choix == 2) {
        printf("Début du programme...\n");
     printf("Chargement des données des athlètes...\n");
 
@@ -46,12 +46,12 @@ int main() {
     scanf("%d", &nb_athletes);
     getchar(); // Pour absorber le caractère de nouvelle ligne restant dans le tampon
         
-    if (nb_athletes > MAX_ATHLETES) {
-        printf("Le nombre d'athlètes dépasse le maximum autorisé (%d).\n", MAX_ATHLETES);
+    if (nb_athletes > NOMBRE_ATHLETES) {
+        printf("Le nombre d'athlètes dépasse le maximum autorisé (%d).\n", NOMBRE_ATHLETES);
         return 1;
     }
 
-    Athlete athletes[MAX_ATHLETES];
+    Athlete athletes[NOMBRE_ATHLETES];
         
     // Demande à l'entraîneur de saisir le nom de chaque athlète
     for (int i = 0; i < nb_athletes; i++) {
@@ -83,7 +83,7 @@ int main() {
        
         printf("Fin du programme.\n");
    }    
-    
+    **/
     else if (choix == 3) {
         int stat;
         printf("Que voulez-vous voir? \n");
@@ -256,5 +256,12 @@ int main() {
 
         
     }
+    }
+}
 
        
+
+  
+     
+
+    
