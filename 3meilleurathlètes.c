@@ -1,16 +1,10 @@
 #include "Bibli.h"
 
-
 #define NOMBRE_ATHLETES 30
+#define MAX_NOM_ATHLETE 50
 
-typedef struct {
-    char nom[50];
-    int heures;
-    int minutes;
-    int secondes;
-    int centiemes;
-} Temps;
 
+// Fonction pour trier les temps dans un tableau en utilisant le tri par insertion
 void trier_temps(Temps temps[], int n) {
     int i, j;
     Temps temp;
@@ -28,10 +22,28 @@ void trier_temps(Temps temps[], int n) {
     }
 }
 
-void afficher_3_plus_rapides(Temps temps[], int n) {
-    printf("Les 3 athlètes les plus rapides :\n");
-    for (int i = 0; i < 3 && i < n; i++) {
-        printf("%s - Temps : %02d:%02d:%02d:%02d\n", temps[i].nom, temps[i].heures, temps[i].minutes, temps[i].secondes, temps[i].centiemes);
+// Fonction pour vérifier si un athlète a déjà été affiché
+int est_deja_affiche(const char *nom, char deja_affiche[][MAX_NOM_ATHLETE], int nombre_affiches) {
+    for (int i = 0; i < nombre_affiches; i++) {
+        if (strcmp(nom, deja_affiche[i]) == 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+// Fonction pour afficher les 3 athlètes les plus rapides d'une discipline en évitant les duplications
+void afficher_3_plus_rapides(Temps temps[], int n, char deja_affiche[][MAX_NOM_ATHLETE], int *nombre_affiches) {
+    int affiches = 0;
+    for (int i = 0; i < n && affiches < 3; i++) {
+        // Afficher seulement si l'athlète n'a pas déjà été affiché
+        if (!est_deja_affiche(temps[i].nom, deja_affiche, *nombre_affiches)) {
+            printf("%s - Temps : %02d:%02d:%02d:%02d\n", temps[i].nom, temps[i].heures, temps[i].minutes, temps[i].secondes, temps[i].centiemes);
+            // Ajouter le nom de l'athlète à la liste des noms déjà affichés
+            strcpy(deja_affiche[*nombre_affiches], temps[i].nom);
+            (*nombre_affiches)++;
+            affiches++;
+        }
     }
     printf("\n");
 }
@@ -39,16 +51,17 @@ void afficher_3_plus_rapides(Temps temps[], int n) {
 int main() {
     FILE *fichier;
     char ligne[100];
-    const char delimiteur[] = ";";
+    const char delimiteur[] = "; ";
     Temps relais[NOMBRE_ATHLETES], m_100[NOMBRE_ATHLETES], marathon[NOMBRE_ATHLETES], m_400[NOMBRE_ATHLETES], m_5000[NOMBRE_ATHLETES];
     int relais_count = 0, m_100_count = 0, marathon_count = 0, m_400_count = 0, m_5000_count = 0;
 
-    char *fichiers[] = {"Ademo.txt", "Adlaurent.txt", "Ali.txt", "Boulon.txt", "Brandon.txt", "Clovis.txt", "Etienne.txt", "Fujitora.txt", "Gourcuff.txt", "Ilyes.txt", "Jimmy.txt", "Kevin.txt", "Lemaître.txt", "Locqman.txt", "Mandzukic.txt", "Messi.txt", "Mkadir.txt", "Mobutu.txt", "Morant.txt", "Neji.txt", "Pablo.txt", "Pirlo.txt", "Robben.txt", "Samy.txt", "Sneijder.txt", "Stephen.txt", "Sylvestre.txt", "Yann.txt", "Krilin.txt", "Riman.txt"};
+    // Liste des fichiers à traiter
+    char *fichiers[] = {"Ademo.txt", "Adlaurent.txt", "Ali.txt", "Bolt.txt", "Brandon.txt", "Clovis.txt", "Etienne.txt", "Fujitora.txt", "Gourcuff.txt", "Ilyes.txt", "Jimmy.txt", "Kevin.txt", "Lemaitre.txt", "Locqman.txt", "Mandzukic.txt", "Messi.txt", "Mkadir.txt", "Mobutu.txt", "Morant.txt", "Neji.txt", "Pablo.txt", "Pirlo.txt", "Robben.txt", "Samy.txt", "Sneijder.txt", "Stephen.txt", "Sylvestre.txt", "Yann.txt", "Krilin.txt", "Riman.txt"};
 
     for (int i = 0; i < NOMBRE_ATHLETES; i++) {
         fichier = fopen(fichiers[i], "r");
 
-        // Vérifier si l'ouverture a réussi
+        // Vérifier si l'ouverture du fichier a réussi
         if (fichier == NULL) {
             fprintf(stderr, "Impossible d'ouvrir le fichier %s.\n", fichiers[i]);
             continue; // Passer au fichier suivant en cas d'échec d'ouverture
@@ -110,7 +123,7 @@ int main() {
                 } else {
                     fprintf(stderr, "Nombre maximum d'athlètes pour la discipline marathon atteint.\n");
                 }
-            } else if (strcmp(discipline, "4*400m") == 0) {
+            } else if (strcmp(discipline, "400m") == 0) {
                 if (m_400_count < NOMBRE_ATHLETES) {
                     strcpy(m_400[m_400_count].nom, fichiers[i]);
                     m_400[m_400_count].heures = heures;
@@ -119,7 +132,7 @@ int main() {
                     m_400[m_400_count].centiemes = centiemes;
                     m_400_count++;
                 } else {
-                    fprintf(stderr, "Nombre maximum d'athlètes pour la discipline 4*400m atteint.\n");
+                    fprintf(stderr, "Nombre maximum d'athlètes pour la discipline 400m atteint.\n");
                 }
             } else if (strcmp(discipline, "5000m") == 0) {
                 if (m_5000_count < NOMBRE_ATHLETES) {
@@ -146,23 +159,28 @@ int main() {
     trier_temps(m_400, m_400_count);
     trier_temps(m_5000, m_5000_count);
 
-    // Afficher les 3 athlètes les plus rapides dans chaque discipline
+    // Tableau pour garder une trace des athlètes déjà affichés
+    char deja_affiche[NOMBRE_ATHLETES][MAX_NOM_ATHLETE];
+    int nombre_affiches = 0;
+
+    // Afficher les 3 athlètes les plus rapides dans chaque discipline en évitant les duplications
     printf("Relais :\n");
-    afficher_3_plus_rapides(relais, relais_count);
+    afficher_3_plus_rapides(relais, relais_count, deja_affiche, &nombre_affiches);
 
     printf("100m :\n");
-    afficher_3_plus_rapides(m_100, m_100_count);
+    afficher_3_plus_rapides(m_100, m_100_count, deja_affiche, &nombre_affiches);
 
     printf("Marathon :\n");
-    afficher_3_plus_rapides(marathon, marathon_count);
+    afficher_3_plus_rapides(marathon, marathon_count, deja_affiche, &nombre_affiches);
 
-    printf("4*400m :\n");
-    afficher_3_plus_rapides(m_400, m_400_count);
+    printf("400m :\n");
+    afficher_3_plus_rapides(m_400, m_400_count, deja_affiche, &nombre_affiches);
 
     printf("5000m :\n");
-    afficher_3_plus_rapides(m_5000, m_5000_count);
+    afficher_3_plus_rapides(m_5000, m_5000_count, deja_affiche, &nombre_affiches);
 
     return 0;
 }
+
 
 
