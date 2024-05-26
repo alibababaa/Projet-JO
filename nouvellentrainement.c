@@ -1,4 +1,4 @@
-#include"Bibli.h"
+#include "Bibli.h"
 Entrainement creerNouvelEntrainement() {
     Entrainement nouvelEntrainement;
     int valid, verif;
