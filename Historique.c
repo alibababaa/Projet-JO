@@ -1,4 +1,4 @@
-#include"Bibli.h"
+/**#include"Bibli.h"
 void afficherHistorique(Athlete athlete) {
     printf("Historique des entraînements pour %s :\n", athlete.nom);
     for (int i = 0; i < athlete.num_entrainement; i++) {
@@ -122,3 +122,4 @@ int main() {
     chargerDonneesAthlete(&athlete, "athlete1.txt");
     return 0;
 }
+**/
