@@ -35,6 +35,14 @@ typedef enum {
     epreuveE  //"4*400m"
 } Epreuve;
 
+const char* nomEpreuve[] = {
+    "100m",
+    "400m",
+    "5000m",
+    "marathon",
+    "4*400m"
+};
+
 // Structure pour stocker la date
 typedef struct {
     int jour;
@@ -53,13 +61,11 @@ typedef struct {
 // Structure pour stocker les informations d'un athlète
 typedef struct {
     char nom[50];               // Nom de l'athlète
-    Entrainement* entrainements; // Détails des entraînements spécifiques de l'athlète
+    Entrainement entrainements[MAX_ENTRAINEMENTS]; // Détails des entraînements spécifiques de l'athlète
     int num_entrainement;        // Nombre d'entraînements enregistrés
-    float* temps;               // Temps pour chaque épreuve
 } Athlete;
 
 // Prototypes des fonctions
-extern const char* nomEpreuve[];
 float Tempsmoyen();
 void tabAthlete();
 void copieinfo();
@@ -79,14 +85,6 @@ void afficher_3_plus_rapides(Temps temps[], int n, char deja_affiche[][MAX_NOM_A
 int convertionEnCentiemes(int heures, int minutes, int secondes, int centiemes);
 void convertionDesCentiemes(int totalCentiemes, int *heures, int *minutes, int *secondes, int *centiemes);
 void resumePerformance(const char *nomFichier);
-
-const char* nomEpreuve[] = {
-    "100m",
-    "400m",
-    "5000m",
-    "marathon",
-    "4*400m"
-};
 
 void afficherHistorique(Athlete athlete) {
     printf("Historique des entraînements pour %s :\n", athlete.nom);
@@ -112,17 +110,15 @@ void copieinfo() {
         if (fichier != NULL) {
             strcpy(athletes[nb_athletes].nom, nom_fichier);
             athletes[nb_athletes].num_entrainement = 0;
-            athletes[nb_athletes].entrainements = malloc(MAX_ENTRAINEMENTS * sizeof(Entrainement));
             char ligne[100];
             while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
                 char* token = strtok(ligne, " ");
                 if (token != NULL) {
                     Date date;
                     if (sscanf(token, "%d/%d/%d", &date.jour, &date.mois, &date.annee) == 3) {
-                        athletes[nb_athletes].entrainements[athletes[nb_athletes].num_entrainement].date = date;
+                        // La date a été correctement lue et assignée à la structure date
                     } else {
                         // Gérer les erreurs de format de la date
-                        continue;
                     }
 
                     token = strtok(NULL, " ");
@@ -142,22 +138,17 @@ void copieinfo() {
     }
 }
 
-// Fonction pour charger les données d'un athlète à partir d'un fichier
 void chargerDonneesAthlete(Athlete* athlete, const char* nom_fichier) {
-    // Ouverture du fichier en mode lecture
     FILE* fichier = fopen(nom_fichier, "r");
     if (fichier != NULL) {
         printf("Chargement des données pour l'athlète %s...\n", athlete->nom);
         athlete->num_entrainement = 0;  // Initialiser le compteur d'entraînements à 0
-        athlete->entrainements = malloc(MAX_ENTRAINEMENTS * sizeof(Entrainement));
 
         char ligne[MAX_LONGUEUR_LIGNE];
-        // Lire chaque ligne du fichier
         while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
-            char* token = strtok(ligne, " ");  // Extraire le premier token (la date)
+            char* token = strtok(ligne, ";");
             if (token != NULL) {
                 Date date;
-                // Utiliser sscanf pour lire la date au format jj/mm/aaaa
                 if (sscanf(token, "%d/%d/%d", &date.jour, &date.mois, &date.annee) == 3) {
                     athlete->entrainements[athlete->num_entrainement].date = date;
                 } else {
@@ -165,33 +156,39 @@ void chargerDonneesAthlete(Athlete* athlete, const char* nom_fichier) {
                     continue; // Passer à la ligne suivante si le format de la date est incorrect
                 }
 
-                // Extraire le token suivant pour l'épreuve
-                token = strtok(NULL, " ");
+                token = strtok(NULL, ";");
                 if (token != NULL) {
-                    athlete->entrainements[athlete->num_entrainement].epreuve = atoi(token);
+                    for (int i = 0; i < 5; i++) {
+                        if (strcmp(token, nomEpreuve[i]) == 0) {
+                            athlete->entrainements[athlete->num_entrainement].epreuve = i;
+                            break;
+                        }
+                    }
                 } else {
                     printf("Erreur de format de l'épreuve.\n");
                     continue; // Passer à la ligne suivante si l'épreuve est manquante
                 }
 
-                // Extraire le token suivant pour le temps
-                token = strtok(NULL, " ");
+                token = strtok(NULL, ";");
                 if (token != NULL) {
-                    athlete->entrainements[athlete->num_entrainement].temps = atof(token);
+                    int heures, minutes, secondes, centiemes;
+                    if (sscanf(token, "%d:%d:%d:%d", &heures, &minutes, &secondes, &centiemes) == 4) {
+                        athlete->entrainements[athlete->num_entrainement].temps = heures * 3600 + minutes * 60 + secondes + centiemes / 100.0;
+                    } else {
+                        printf("Erreur de format du temps.\n");
+                        continue; // Passer à la ligne suivante si le temps est manquant
+                    }
                 } else {
                     printf("Erreur de format du temps.\n");
                     continue; // Passer à la ligne suivante si le temps est manquant
                 }
 
-                // Incrémenter le compteur d'entraînements de l'athlète
                 athlete->num_entrainement++;
             }
         }
-        // Fermer le fichier après la lecture
         fclose(fichier);
         printf("Données pour l'athlète %s chargées avec succès.\n", athlete->nom);
     } else {
-        // Message d'erreur si le fichier ne peut pas être ouvert
         printf("Impossible d'ouvrir le fichier %s pour l'athlète %s.\n", nom_fichier, athlete->nom);
     }
 }
@@ -201,50 +198,34 @@ int main() {
     printf("Chargement des données des athlètes...\n");
 
     int nb_athletes = 0;
-    
-    // Demande à l'entraîneur de saisir le nombre d'athlètes
     printf("Combien d'athlètes voulez-vous charger ? (maximum 30) : ");
     scanf("%d", &nb_athletes);
     getchar(); // Pour absorber le caractère de nouvelle ligne restant dans le tampon
-    
+
     if (nb_athletes > NOMBRE_ATHLETES) {
         printf("Le nombre d'athlètes dépasse le maximum autorisé (%d).\n", NOMBRE_ATHLETES);
         return 1;
     }
 
     Athlete athletes[NOMBRE_ATHLETES];
-    
-    // Demande à l'entraîneur de saisir le nom de chaque athlète
+
     for (int i = 0; i < nb_athletes; i++) {
         printf("Entrez le nom de l'athlète %d : ", i + 1);
         fgets(athletes[i].nom, sizeof(athletes[i].nom), stdin);
-        // Supprimer le caractère de nouvelle ligne (\n) à la fin du nom
         athletes[i].nom[strcspn(athletes[i].nom, "\n")] = '\0';
     }
 
-    // Chargement des données pour chaque athlète
     for (int i = 0; i < nb_athletes; i++) {
         char nom_fichier[100];
         sprintf(nom_fichier, "%s.txt", athletes[i].nom);
         chargerDonneesAthlete(&athletes[i], nom_fichier);
     }
 
-    // Afficher les entraînements chargés pour chaque athlète
     for (int i = 0; i < nb_athletes; i++) {
-        printf("\nEntraînements de l'athlète %s:\n", athletes[i].nom);
-        for (int j = 0; j < athletes[i].num_entrainement; j++) {
-            Entrainement e = athletes[i].entrainements[j];
-            printf("Entraînement %d : Date: %02d/%02d/%04d, Épreuve: %s, Temps: %.2f\n",
-                   j + 1, e.date.jour, e.date.mois, e.date.annee, nomEpreuve[e.epreuve], e.temps);
-        }
-    }
-
-    // Libérer la mémoire allouée pour les entraînements
-    for (int i = 0; i < nb_athletes; i++) {
-        free(athletes[i].entrainements);
+        afficherHistorique(athletes[i]);
     }
 
     printf("Fin du programme.\n");
+
     return 0;
 }
-
