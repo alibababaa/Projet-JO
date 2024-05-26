@@ -19,6 +19,9 @@ Historique.o: Historique.c Bibli.h
 nouvellentrainement.o: nouvellentrainement.c Bibli.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
+resumePerf.o: resumePerf.c Bibli.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
 relais.o: relais.c Bibli.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
