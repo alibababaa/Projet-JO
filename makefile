@@ -29,7 +29,7 @@ sauvegarderEntrainement.o: sauvegarderEntrainement.c Bibli.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 #Cible d'édition de liens
-JO: main.o 3meilleurathlètes.o Historique.o nouvellentrainement.o relais.o sauvegarderEntrainement.o resumePerformance.o
+JO: main.o 3meilleurathlètes.o Historique.o nouvellentrainement.o resumePerformance.o relais.o sauvegarderEntrainement.o 
 	$(CC) $(LDFLAGS) $^ -o $@
 
 #Règle de nettoyage
