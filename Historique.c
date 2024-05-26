@@ -51,48 +51,6 @@ void copieinfo() {
         afficherHistorique(athletes[i]);
     }
 }
-void chargerDonneesAthlete(Athlete* athlete, const char* nom_fichier) {
-    FILE* fichier = fopen(nom_fichier, "r");
-    if (fichier != NULL) {
-        printf("Chargement des données pour l'athlète %s...\n", athlete->nom);
-        athlete->num_entrainement = 0;
-        char ligne[100];
-        while (fgets(ligne, sizeof(ligne), fichier) != NULL) {
-            char* token = strtok(ligne, " ");
-            if (token != NULL) {
-                Date date;
-                if (sscanf(token, "%d/%d/%d", &date.jour, &date.mois, &date.annee) == 3) {
-                    printf("Date : %d/%d/%d\n", date.jour, date.mois, date.annee);
-                }
-                else {
-                    printf("Erreur de format de la date.\n");
-                }
-
-                token = strtok(NULL, " ");
-                athlete->entrainements[athlete->num_entrainement].epreuve = atoi(token);
-                printf("Epreuve : %d\n", athlete->entrainements[athlete->num_entrainement].epreuve);
-                
-                token = strtok(NULL, " ");
-                athlete->entrainements[athlete->num_entrainement].temps = atof(token);
-                printf("Temps : %f\n", athlete->entrainements[athlete->num_entrainement].temps);
-                
-                athlete->num_entrainement++;
-            }
-        }
-        fclose(fichier);
-        printf("Données pour l'athlète %s chargées avec succès.\n", athlete->nom);
-    }
-    else {
-        printf("Impossible d'ouvrir le fichier %s pour l'athlète %s.\n", nom_fichier, athlete->nom);
-    }
-}
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#define MAX_ENTRAINEMENTS 100     // Nombre maximum d'entraînements qu'un athlète peut avoir
-#define MAX_LONGUEUR_LIGNE 100    // Longueur maximale d'une ligne lue dans le fichier
 // Fonction pour charger les données d'un athlète à partir d'un fichier
 void chargerDonneesAthlete(Athlete* athlete, const char* nom_fichier) {
     // Ouverture du fichier en mode lecture
@@ -150,6 +108,13 @@ void chargerDonneesAthlete(Athlete* athlete, const char* nom_fichier) {
         printf("Impossible d'ouvrir le fichier %s pour l'athlète %s.\n", nom_fichier, athlete->nom);
     }
 }
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
 
 int main() {
     Athlete athlete;
