@@ -14,7 +14,7 @@ int main() {
     printf("Bonjour\n");
     printf("Que voulez-vous faire?\n");
     printf("1- Entrer et sauvegarder les informations d'un nouvel entrainement?\n");
-    printf("2- Consulter l'historique des entrainements?\n");
+   // printf("2- Consulter l'historique des entrainements?\n");
     printf("3- Consulter les statistiques de performances des athlètes?\n");
     scanf("%d", &choix);
 
@@ -224,7 +224,7 @@ int main() {
             return 0;
         
     }
-    if(stat == 2) {
+    /**if(stat == 2) {
         // Liste des prénoms des athlètes
         char *prenoms[] = {"Ademo", "Adlaurent", "Ali", "Bolt", "Brandon", "Clovis", "Etienne", "Fujitora", "Gourcuff", "Ilyes", "Jimmy", "Kevin", "Krilin", "Lemaître", "Locqman", "Mandzukic", "Messi", "Mkadir", "Mobutu", "Morant", "Neji", "Pablo", "Pirlo", "Robben", "Samy", "Sneijder", "Stephen", "Sylvestre", "Yann",  "Riman"};
         
@@ -258,7 +258,7 @@ int main() {
     }
     }
 }
-
+**/
        
 
   
