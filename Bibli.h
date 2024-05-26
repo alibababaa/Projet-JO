@@ -54,7 +54,7 @@ void afficherHistorique(Athlete athlete);
 Entrainement creerNouvelEntrainement();
 void sauvegarderEntrainement(const char* nomFichier, Entrainement entrainement);
 //Athlete* lireAthlete(const char* nomFichier);
-void trouverMeilleursAthletes(const char* nomFichier, Athlete* meilleursAthletes[3]);
+//void trouverMeilleursAthletes(const char* nomFichier, Athlete* meilleursAthletes[3]);
 int verifierRelaisExistant(const char* nomFichier, Date date);
 Entrainement* creerEntrainementRelais(Date date);
 void chargerDonneesAthlete(Athlete* athlete, const char* nom_fichier);
