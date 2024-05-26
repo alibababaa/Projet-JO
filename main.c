@@ -207,9 +207,37 @@ int main() {
             afficher_3_plus_rapides(m_5000, m_5000_count, deja_affiche, &nombre_affiches);
 
             return 0;
-        }
+        
     }
     if(stat == 2) {
+        // Liste des prénoms des athlètes
+        char *prenoms[] = {"Ademo", "Adlaurent", "Ali", "Bolt", "Brandon", "Clovis", "Etienne", "Fujitora", "Gourcuff", "Ilyes", "Jimmy", "Kevin", "Krilin", "Lemaître", "Locqman", "Mandzukic", "Messi", "Mkadir", "Mobutu", "Morant", "Neji", "Pablo", "Pirlo", "Robben", "Samy", "Sneijder", "Stephen", "Sylvestre", "Yann",  "Riman"};
+        
+        
+        int nombreAthletes = sizeof(prenoms) / sizeof(prenoms[0]);
+
+        int athleteResume;
+        char nomFichier[100];
+
+        printf("De quel athlète voulez-vous le résumé ?\n");
+        for (int i = 0; i < nombreAthletes; i++) {
+            printf("%d: %s\n", i + 1, prenoms[i]);
+        }
+
+        printf("Entrez le numéro correspondant à l'athlète: ");
+        scanf("%d", &athleteResume);
+
+        if (athleteResume < 1 || athleteResume > nombreAthletes) {
+            printf("Erreur de saisie de numéro.\n");
+            return 1;
+        }
+
+        snprintf(nomFichier, sizeof(nomFichier), "%s.txt", prenoms[athleteResume - 1]);
+
+        resumePerformance(nomFichier);
+
+        return 0;
+        
 
         
     }
