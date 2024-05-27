@@ -7,7 +7,7 @@ int main() {
     printf("Bonjour\n");
     printf("Que voulez-vous faire?\n");
     printf("1- Entrer et sauvegarder les informations d'un nouvel entrainement?\n");
-   // printf("2- Consulter l'historique des entrainements?\n");
+    printf("2- Consulter l'historique des entrainements?\n");
     printf("3- Consulter les statistiques de performances des athlètes?\n");
     scanf("%d", &choix);
 
