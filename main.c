@@ -266,6 +266,9 @@ int main() {
 
     
  
+
+    
+ 
     /**if(stat == 2) {
         // Liste des prénoms des athlètes
         char *prenoms[] = {"Ademo", "Adlaurent", "Ali", "Bolt", "Brandon", "Clovis", "Etienne", "Fujitora", "Gourcuff", "Ilyes", "Jimmy", "Kevin", "Krilin", "Lemaître", "Locqman", "Mandzukic", "Messi", "Mkadir", "Mobutu", "Morant", "Neji", "Pablo", "Pirlo", "Robben", "Samy", "Sneijder", "Stephen", "Sylvestre", "Yann",  "Riman"};
