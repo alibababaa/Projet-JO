@@ -35,7 +35,7 @@ int main() {
 
     }
     }
-   /** else if (choix == 2) {
+   else if (choix == 2) {
        printf("Début du programme...\n");
     printf("Chargement des données des athlètes...\n");
 
@@ -83,7 +83,7 @@ int main() {
        
         printf("Fin du programme.\n");
    }    
-    **/
+    
     else if (choix == 3) {
         int stat;
         printf("Que voulez-vous voir? \n");
