@@ -4,6 +4,7 @@
 #include <time.h>
 #include <math.h>
 #include <limits.h>
+#include <ctype.h>
 
 #define MAX_ENTRAINEMENTS 100     // Nombre maximum d'entraînements qu'un athlète peut avoir
 #define MAX_LONGUEUR_LIGNE 100    // Longueur maximale d'une ligne lue dans le fichier
