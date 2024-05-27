@@ -1,12 +1,5 @@
 #include "Bibli.h"
 
-const char* nomEpreuve[] = {
-    "100m",
-    "400m",
-    "5000m",
-    "marathon",
-    "4*400m"
-};
 
 int main() {
  
