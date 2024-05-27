@@ -80,7 +80,7 @@ void convertionDesCentiemes(int totalCentiemes, int *heures, int *minutes, int *
 void resumePerformance(const char *nomFichier);
 void afficherHistorique(Athlete athlete);
 void chargerDonneesAthlete(Athlete* athlete, const char* nom_fichier);
-
+void libererMemoireAthlete(Athlete* athlete);
 
 
 
