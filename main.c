@@ -35,29 +35,25 @@ int main() {
 
     }
     }
-   /** else if (choix == 2) {
-       printf("Début du programme...\n");
+    else if (choix == 2) {
+    printf("Début du programme...\n");
     printf("Chargement des données des athlètes...\n");
 
     int nb_athletes = 0;
-        
-    // Demande à l'entraîneur de saisir le nombre d'athlètes
     printf("Combien d'athlètes voulez-vous charger ? (maximum 30) : ");
     scanf("%d", &nb_athletes);
     getchar(); // Pour absorber le caractère de nouvelle ligne restant dans le tampon
-        
-    if (nb_athletes > NOMBRE_ATHLETES) {
+if (nb_athletes > NOMBRE_ATHLETES) {
         printf("Le nombre d'athlètes dépasse le maximum autorisé (%d).\n", NOMBRE_ATHLETES);
         return 1;
     }
 
     Athlete athletes[NOMBRE_ATHLETES];
-        
-    // Demande à l'entraîneur de saisir le nom de chaque athlète
+
+    // Saisie des noms des athlètes
     for (int i = 0; i < nb_athletes; i++) {
         printf("Entrez le nom de l'athlète %d : ", i + 1);
         fgets(athletes[i].nom, sizeof(athletes[i].nom), stdin);
-        // Supprimer le caractère de nouvelle ligne (\n) à la fin du nom
         athletes[i].nom[strcspn(athletes[i].nom, "\n")] = '\0';
     }
 
@@ -68,22 +64,20 @@ int main() {
         chargerDonneesAthlete(&athletes[i], nom_fichier);
     }
 
-    // Afficher les entraînements chargés pour chaque athlète
+    // Affichage de l'historique pour chaque athlète
     for (int i = 0; i < nb_athletes; i++) {
-        printf("\nEntraînements de l'athlète %s:\n", athletes[i].nom);
-        for (int j = 0; j < athletes[i].num_entrainement; j++) {
-            Entrainement e = athletes[i].entrainements[j];
-            printf("Entraînement %d : Date: %02d/%02d/%04d, Épreuve: %s, Temps: %.2f\n",
-                   j + 1, e.date.jour, e.date.mois, e.date.annee, e.epreuve, e.temps);
-        }
+        afficherHistorique(athletes[i]);
     }
 
-  
-       //copieinfo();
-       
-        printf("Fin du programme.\n");
-   }    
-    **/
+    // Libération de la mémoire allouée pour chaque athlète
+    for (int i = 0; i < nb_athletes; i++) {
+        libererMemoireAthlete(&athletes[i]);
+    }
+
+    printf("Fin du programme.\n");
+
+    return 0;
+}
     else if (choix == 3) {
         int stat;
         printf("Que voulez-vous voir? \n");
