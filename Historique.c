@@ -17,7 +17,7 @@ void afficherHistorique(Athlete athlete) {
                athlete.entrainements[i].temps);
     }
     printf("Nombre d'entraînements: %d\n", athlete.num_entrainement);
-}
+
 
 void chargerDonneesAthlete(Athlete* athlete, const char* nom_fichier) {
     FILE* fichier = fopen(nom_fichier, "r");
@@ -90,4 +90,5 @@ void chargerDonneesAthlete(Athlete* athlete, const char* nom_fichier) {
 void libererMemoireAthlete(Athlete* athlete) {
     // Libération de la mémoire allouée pour les entraînements
     free(athlete->entrainements);
+}
 }
