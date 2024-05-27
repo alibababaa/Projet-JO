@@ -1,4 +1,5 @@
 #include "Bibli.h"
+
 const char* nomEpreuve[] = {
     "100m",
     "400m",
@@ -18,7 +19,7 @@ void afficherHistorique(Athlete athlete) {
     }
     printf("Nombre d'entraînements: %d\n", athlete.num_entrainement);
 
-
+}
 void chargerDonneesAthlete(Athlete* athlete, const char* nom_fichier) {
     FILE* fichier = fopen(nom_fichier, "r");
     if (fichier != NULL) {
@@ -87,8 +88,10 @@ void chargerDonneesAthlete(Athlete* athlete, const char* nom_fichier) {
     }
 }
 
+
+
 void libererMemoireAthlete(Athlete* athlete) {
     // Libération de la mémoire allouée pour les entraînements
     free(athlete->entrainements);
 }
-}
+
