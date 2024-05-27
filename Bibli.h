@@ -79,7 +79,7 @@ int convertionEnCentiemes(int heures, int minutes, int secondes, int centiemes);
 void convertionDesCentiemes(int totalCentiemes, int *heures, int *minutes, int *secondes, int *centiemes);
 void resumePerformance(const char *nomFichier);
 void afficherHistorique(Athlete athlete);
-
+void chargerDonneesAthlete(Athlete* athlete, const char* nom_fichier);
 
 
 
