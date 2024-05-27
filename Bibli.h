@@ -78,6 +78,7 @@ void afficher_3_plus_rapides(Temps temps[], int n, char deja_affiche[][MAX_NOM_A
 int convertionEnCentiemes(int heures, int minutes, int secondes, int centiemes);
 void convertionDesCentiemes(int totalCentiemes, int *heures, int *minutes, int *secondes, int *centiemes);
 void resumePerformance(const char *nomFichier);
+void afficherHistorique(Athlete athlete);
 
 
 
