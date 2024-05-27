@@ -35,25 +35,29 @@ int main() {
 
     }
     }
-    else if (choix == 2) {
-    printf("Début du programme...\n");
+   /** else if (choix == 2) {
+       printf("Début du programme...\n");
     printf("Chargement des données des athlètes...\n");
 
     int nb_athletes = 0;
+        
+    // Demande à l'entraîneur de saisir le nombre d'athlètes
     printf("Combien d'athlètes voulez-vous charger ? (maximum 30) : ");
     scanf("%d", &nb_athletes);
     getchar(); // Pour absorber le caractère de nouvelle ligne restant dans le tampon
-if (nb_athletes > NOMBRE_ATHLETES) {
+        
+    if (nb_athletes > NOMBRE_ATHLETES) {
         printf("Le nombre d'athlètes dépasse le maximum autorisé (%d).\n", NOMBRE_ATHLETES);
         return 1;
     }
 
     Athlete athletes[NOMBRE_ATHLETES];
-
-    // Saisie des noms des athlètes
+        
+    // Demande à l'entraîneur de saisir le nom de chaque athlète
     for (int i = 0; i < nb_athletes; i++) {
         printf("Entrez le nom de l'athlète %d : ", i + 1);
         fgets(athletes[i].nom, sizeof(athletes[i].nom), stdin);
+        // Supprimer le caractère de nouvelle ligne (\n) à la fin du nom
         athletes[i].nom[strcspn(athletes[i].nom, "\n")] = '\0';
     }
 
@@ -64,20 +68,22 @@ if (nb_athletes > NOMBRE_ATHLETES) {
         chargerDonneesAthlete(&athletes[i], nom_fichier);
     }
 
-    // Affichage de l'historique pour chaque athlète
+    // Afficher les entraînements chargés pour chaque athlète
     for (int i = 0; i < nb_athletes; i++) {
-        afficherHistorique(athletes[i]);
+        printf("\nEntraînements de l'athlète %s:\n", athletes[i].nom);
+        for (int j = 0; j < athletes[i].num_entrainement; j++) {
+            Entrainement e = athletes[i].entrainements[j];
+            printf("Entraînement %d : Date: %02d/%02d/%04d, Épreuve: %s, Temps: %.2f\n",
+                   j + 1, e.date.jour, e.date.mois, e.date.annee, e.epreuve, e.temps);
+        }
     }
 
-    // Libération de la mémoire allouée pour chaque athlète
-    for (int i = 0; i < nb_athletes; i++) {
-        libererMemoireAthlete(&athletes[i]);
-    }
-
-    printf("Fin du programme.\n");
-
-    return 0;
-}
+  
+       //copieinfo();
+       
+        printf("Fin du programme.\n");
+   }    
+    **/
     else if (choix == 3) {
         int stat;
         printf("Que voulez-vous voir? \n");
@@ -218,6 +224,48 @@ if (nb_athletes > NOMBRE_ATHLETES) {
             return 0;
         
     }
+        if(stat == 2) {
+        // Liste des prénoms des athlètes
+        char *prenoms[] = {"Ademo", "Adlaurent", "Ali", "Bolt", "Brandon", "Clovis", "Etienne", "Fujitora", "Gourcuff", "Ilyes", "Jimmy", "Kevin", "Krilin", "Lemaître", "Locqman", "Mandzukic", "Messi", "Mkadir", "Mobutu", "Morant", "Neji", "Pablo", "Pirlo", "Robben", "Samy", "Sneijder", "Stephen", "Sylvestre", "Yann",  "Riman"};
+        
+        
+        int nombreAthletes = sizeof(prenoms) / sizeof(prenoms[0]);
+
+        int athleteResume;
+        char nomFichier[100];
+
+        printf("De quel athlète voulez-vous le résumé ?\n");
+        for (int i = 0; i < nombreAthletes; i++) {
+            printf("%d: %s\n", i + 1, prenoms[i]);
+        }
+
+        printf("Entrez le numéro correspondant à l'athlète: ");
+        scanf("%d", &athleteResume);
+
+        if (athleteResume < 1 || athleteResume > nombreAthletes) {
+            printf("Erreur de saisie de numéro.\n");
+            return 1;
+        }
+
+        snprintf(nomFichier, sizeof(nomFichier), "%s.txt", prenoms[athleteResume - 1]);
+
+        resumePerformance(nomFichier);
+
+        return 0;
+        
+
+        
+    }
+    }
+}
+
+       
+
+  
+     
+
+    
+ 
     /**if(stat == 2) {
         // Liste des prénoms des athlètes
         char *prenoms[] = {"Ademo", "Adlaurent", "Ali", "Bolt", "Brandon", "Clovis", "Etienne", "Fujitora", "Gourcuff", "Ilyes", "Jimmy", "Kevin", "Krilin", "Lemaître", "Locqman", "Mandzukic", "Messi", "Mkadir", "Mobutu", "Morant", "Neji", "Pablo", "Pirlo", "Robben", "Samy", "Sneijder", "Stephen", "Sylvestre", "Yann",  "Riman"};
